@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -6,7 +6,7 @@
     <title>Guaraoby - Entre notas e votos</title>
     <style>
         body {
-            font-family: 'Caviar Dreams', sans-serif;
+            font-family: 'Century Gothic', 'Caviar Dreams', sans-serif;
             background-color: #1f1f1f;
             color: #b08d57;
             margin: 0;
@@ -27,10 +27,17 @@
         }
         .icone-musical {
             position: absolute;
-            opacity: 0.3;
+            opacity: 0.2;
             fill: #b08d57;
             width: 60px;
             height: 60px;
+            animation: float 15s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
         }
 
         header {
@@ -38,35 +45,81 @@
             padding: 15px;
             font-size: 14px;
             background-color: #141414;
+            border-bottom: 1px solid #b08d57;
         }
         header p {
             margin: 3px 0;
         }
         h1 {
-            font-family: 'Typhone', serif;
+            font-family: 'Trajan Pro', 'Typhone', serif;
             font-size: 48px;
             margin-bottom: 5px;
+            letter-spacing: 2px;
         }
         h2 {
             font-size: 20px;
             font-weight: normal;
             margin-top: 0;
+            font-style: italic;
         }
         main {
             text-align: center;
             padding: 20px;
-            max-width: 800px;
+            max-width: 1000px; /* Aumentei a largura máxima para acomodar mais fotos */
             margin: auto;
         }
+
+        /* --- Estilos da Galeria de Inspiração --- */
+        .legenda-galeria {
+            font-size: 22px;
+            font-style: italic;
+            margin-top: 20px;
+            margin-bottom: 25px;
+            border-bottom: 1px solid #b08d57;
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        .galeria-container {
+            display: flex;
+            justify-content: center;
+            gap: 25px; /* Espaçamento entre as fotos */
+            flex-wrap: wrap; /* Para que as fotos quebrem a linha em telas menores */
+            margin: 40px 0; /* Espaçamento acima e abaixo da galeria */
+        }
+
+        .foto-galeria {
+            width: 250px; /* Largura da foto */
+            height: 250px; /* Altura da foto */
+            border-radius: 15px; /* Bordas arredondadas */
+            overflow: hidden; /* Garante que a imagem não saia das bordas arredondadas */
+            border: 3px solid #b08d57; /* Borda dourada luxuosa */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); /* Sombra para dar profundidade */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .foto-galeria:hover {
+            transform: scale(1.05); /* Efeito de zoom ao passar o mouse */
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4); /* Sombra dourada no hover */
+        }
+
+        .foto-galeria img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Faz a imagem cobrir todo o espaço sem distorcer */
+        }
+
+
         .caixa {
             border: 2px solid #b08d57;
-            padding: 15px;
+            padding: 20px;
             margin: 15px auto;
             max-width: 500px;
             border-radius: 10px;
             cursor: pointer;
             transition: all 0.3s ease;
             background-color: rgba(0, 0, 0, 0.4);
+            line-height: 1.6;
         }
         .caixa:hover {
             background-color: rgba(176, 141, 87, 0.1);
@@ -74,17 +127,19 @@
         .caixa.selecionada {
             background-color: rgba(176, 141, 87, 0.2);
             border-color: gold;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
         }
         form {
             margin-top: 20px;
         }
         input, textarea, button {
             width: 100%;
-            padding: 10px;
-            margin: 5px 0;
-            border: none;
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid #b08d57;
             border-radius: 5px;
-            font-family: 'Caviar Dreams', sans-serif;
+            font-family: 'Century Gothic', 'Caviar Dreams', sans-serif;
+            box-sizing: border-box;
         }
         input, textarea {
             background-color: #2a2a2a;
@@ -96,6 +151,7 @@
             font-weight: bold;
             cursor: pointer;
             transition: 0.3s;
+            font-size: 16px;
         }
         button:hover {
             background-color: gold;
@@ -103,52 +159,20 @@
         @media (max-width: 600px) {
             .icone-musical { width: 40px; height: 40px; }
             h1 { font-size: 36px; }
+            .foto-galeria { width: 100%; height: 280px; }
         }
     </style>
 </head>
 <body>
     <!-- Fundo musical -->
     <div class="fundo-musical">
-        <!-- Nota musical -->
-        <svg class="icone-musical" style="top:5%; left:10%;" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-            <path d="M52 4v40.7c-2.4-1.3-5.3-2.1-8.5-2.1-8.3 0-15 5.4-15 12s6.7 12 15 12 15-5.4 15-12V16h8V4H52z"/>
-        </svg>
-        <!-- Violino -->
-        <svg class="icone-musical" style="top:15%; left:70%;" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-            <path d="M50 14l-4-4-6 6-2-2 6-6-4-4L22 22l4 4-6 6 2 2 6-6 4 4-6 6 4 4L50 14z"/>
-        </svg>
-        <!-- Nota musical -->
-        <svg class="icone-musical" style="top:25%; left:30%;" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-            <path d="M52 4v40.7c-2.4-1.3-5.3-2.1-8.5-2.1-8.3 0-15 5.4-15 12s6.7 12 15 12 15-5.4 15-12V16h8V4H52z"/>
-        </svg>
-        <!-- Violino -->
-        <svg class="icone-musical" style="top:35%; left:80%;" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-            <path d="M50 14l-4-4-6 6-2-2 6-6-4-4L22 22l4 4-6 6 2 2 6-6 4 4-6 6 4 4L50 14z"/>
-        </svg>
-        <!-- Nota musical -->
-        <svg class="icone-musical" style="top:45%; left:20%;" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-            <path d="M52 4v40.7c-2.4-1.3-5.3-2.1-8.5-2.1-8.3 0-15 5.4-15 12s6.7 12 15 12 15-5.4 15-12V16h8V4H52z"/>
-        </svg>
-        <!-- Violino -->
-        <svg class="icone-musical" style="top:55%; left:60%;" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-            <path d="M50 14l-4-4-6 6-2-2 6-6-4-4L22 22l4 4-6 6 2 2 6-6 4 4-6 6 4 4L50 14z"/>
-        </svg>
-        <!-- Nota musical -->
-        <svg class="icone-musical" style="top:65%; left:40%;" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-            <path d="M52 4v40.7c-2.4-1.3-5.3-2.1-8.5-2.1-8.3 0-15 5.4-15 12s6.7 12 15 12 15-5.4 15-12V16h8V4H52z"/>
-        </svg>
-        <!-- Violino -->
-        <svg class="icone-musical" style="top:75%; left:10%;" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-            <path d="M50 14l-4-4-6 6-2-2 6-6-4-4L22 22l4 4-6 6 2 2 6-6 4 4-6 6 4 4L50 14z"/>
-        </svg>
-        <!-- Nota musical -->
-        <svg class="icone-musical" style="top:85%; left:70%;" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-            <path d="M52 4v40.7c-2.4-1.3-5.3-2.1-8.5-2.1-8.3 0-15 5.4-15 12s6.7 12 15 12 15-5.4 15-12V16h8V4H52z"/>
-        </svg>
-        <!-- Violino -->
-        <svg class="icone-musical" style="top:92%; left:50%; transform: translateY(-5%);" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-            <path d="M50 14l-4-4-6 6-2-2 6-6-4-4L22 22l4 4-6 6 2 2 6-6 4 4-6 6 4 4L50 14z"/>
-        </svg>
+        <svg class="icone-musical" style="top:5%; left:10%;" viewBox="0 0 64 64"><path d="M52 4v40.7c-2.4-1.3-5.3-2.1-8.5-2.1-8.3 0-15 5.4-15 12s6.7 12 15 12 15-5.4 15-12V16h8V4H52z"/></svg>
+        <svg class="icone-musical" style="top:15%; left:70%; animation-delay: -2s;" viewBox="0 0 64 64"><path d="M50 14l-4-4-6 6-2-2 6-6-4-4L22 22l4 4-6 6 2 2 6-6 4 4-6 6 4 4L50 14z"/></svg>
+        <svg class="icone-musical" style="top:25%; left:30%; animation-delay: -4s;" viewBox="0 0 64 64"><path d="M52 4v40.7c-2.4-1.3-5.3-2.1-8.5-2.1-8.3 0-15 5.4-15 12s6.7 12 15 12 15-5.4 15-12V16h8V4H52z"/></svg>
+        <svg class="icone-musical" style="top:35%; left:80%; animation-delay: -6s;" viewBox="0 0 64 64"><path d="M50 14l-4-4-6 6-2-2 6-6-4-4L22 22l4 4-6 6 2 2 6-6 4 4-6 6 4 4L50 14z"/></svg>
+        <svg class="icone-musical" style="top:45%; left:20%; animation-delay: -8s;" viewBox="0 0 64 64"><path d="M52 4v40.7c-2.4-1.3-5.3-2.1-8.5-2.1-8.3 0-15 5.4-15 12s6.7 12 15 12 15-5.4 15-12V16h8V4H52z"/></svg>
+        <svg class="icone-musical" style="top:75%; left:10%; animation-delay: -10s;" viewBox="0 0 64 64"><path d="M50 14l-4-4-6 6-2-2 6-6-4-4L22 22l4 4-6 6 2 2 6-6 4 4-6 6 4 4L50 14z"/></svg>
+        <svg class="icone-musical" style="top:85%; left:70%; animation-delay: -12s;" viewBox="0 0 64 64"><path d="M52 4v40.7c-2.4-1.3-5.3-2.1-8.5-2.1-8.3 0-15 5.4-15 12s6.7 12 15 12 15-5.4 15-12V16h8V4H52z"/></svg>
     </div>
 
     <header>
@@ -159,27 +183,50 @@
         <h2>Entre notas e votos</h2>
         <p>O valor do serviço pode variar de acordo com a cidade, estrutura disponível e formação instrumental escolhida.</p>
 
+        <!-- Seção de Fotos -->
+        <h3 class="legenda-galeria">Inspire-se em alguns de nossos serviços</h3>
+        <div class="galeria-container">
+            <div class="foto-galeria">
+                <img src="imagens/foto_casamento_1.jpg" alt="Músicos tocando violino e violoncelo ao ar livre">
+            </div>
+            <div class="foto-galeria">
+                <img src="imagens/foto_casamento_2.jpg" alt="Trio de músicos com violino, violoncelo e piano em ambiente interno">
+            </div>
+            <div class="foto-galeria">
+                <img src="imagens/foto_casamento_3.jpg" alt="Quarteto de cordas em apresentação de casamento">
+            </div>
+            <!-- NOVOS CAMPOS DE IMAGEM -->
+            <div class="foto-galeria">
+                <img src="imagens/foto_casamento_4.jpg" alt="Apresentação musical em evento corporativo">
+            </div>
+            <div class="foto-galeria">
+                <img src="imagens/foto_casamento_5.jpg" alt="Detalhe de músicos em recepção de jantar">
+            </div>
+        </div>
+        <!-- Fim da Seção de Fotos -->
+
+
         <div class="caixa" onclick="selecionar(this)">
             🎻 Proposta 1:<br>
             1 Violino<br>
             1 Violoncelo<br>
-            1 Piano digital (com pianista que também atua como cantor)
+            1 Piano digital 
         </div>
         <div class="caixa" onclick="selecionar(this)">
             🎻 Proposta 2:<br>
             2 Violinos<br>
             1 Viola<br>
             1 Violoncelo<br>
-            1 Piano digital (com pianista que também atua como cantor)
+            1 Piano digital 
         </div>
         <div class="caixa" onclick="selecionar(this)">
             🎻 Proposta 3:<br>
             2 Violinos<br>
             1 Violoncelo<br>
-            1 Piano digital (com pianista que também atua como cantor)
+            1 Piano digital
         </div>
         <div class="caixa" onclick="selecionar(this)">
-            🎶 Para o jantar ou recepção:<br>
+            🎶 Para o jantar ou recepção (até 02h de música ao vivo):<br>
             1 Violino<br>
             1 Violão<br>
             1 Violoncelo<br>
@@ -187,14 +234,18 @@
             1 Bateria<br>
             2 Vozes
         </div>
+        <div class="caixa" onclick="selecionar(this)">
+            🎺 Opcionais Adicionais:<br>
+            Clarins Triunfais - Trompetes (Entrada da noiva)<br>
+            Cajón (percussão)<br>
+            Cantores
+        </div>
 
-        <form action="https://api.whatsapp.com/send" method="get" target="_blank">
-            <input type="hidden" name="phone" value="5567981339514">
-            <input type="hidden" id="mensagem" name="text">
+        <form onsubmit="prepararMensagem(event)">
             <input type="text" id="nome" placeholder="Seu nome" required>
             <input type="email" id="email" placeholder="Seu email" required>
-            <textarea id="detalhes" placeholder="Detalhes do evento" required></textarea>
-            <button type="submit">Enviar pelo WhatsApp</button>
+            <textarea id="detalhes" placeholder="Detalhes do evento (Data, Local, etc)" required></textarea>
+            <button type="submit">Solicitar Orçamento via WhatsApp</button>
         </form>
     </main>
 
@@ -204,22 +255,38 @@
             if (selecionada) {
                 selecionada.classList.remove('selecionada');
             }
-            elemento.classList.add('selecionada');
-            selecionada = elemento;
-            atualizarMensagem();
+            if (selecionada === elemento) {
+                selecionada = null; // Permite desmarcar a caixa
+            } else {
+                elemento.classList.add('selecionada');
+                selecionada = elemento;
+            }
         }
 
-        function atualizarMensagem() {
+        function prepararMensagem(event) {
+            event.preventDefault(); // Impede o envio padrão do formulário
+            
             let nome = document.getElementById('nome').value;
             let email = document.getElementById('email').value;
             let detalhes = document.getElementById('detalhes').value;
-            let proposta = selecionada ? selecionada.innerText : '';
-            document.getElementById('mensagem').value = `Olá, meu nome é ${nome}. Email: ${email}. Gostaria de informações sobre: ${proposta}. Detalhes: ${detalhes}`;
-        }
+            
+            let propostaSelecionada = "Nenhuma proposta selecionada.";
+            if (selecionada) {
+                // Limpa o texto para pegar apenas o conteúdo principal
+                propostaSelecionada = selecionada.innerText.trim();
+            }
 
-        document.querySelectorAll('#nome, #email, #detalhes').forEach(el => {
-            el.addEventListener('input', atualizarMensagem);
-        });
+            let mensagem = `Olá, meu nome é ${nome} (${email}).\n\nGostaria de um orçamento para a seguinte formação:\n*${propostaSelecionada}*\n\nDetalhes do evento:\n${detalhes}`;
+            
+            let numeroWhatsapp = "5567981339514";
+            let urlWhatsapp = `https://api.whatsapp.com/send?phone=${numeroWhatsapp}&text=${encodeURIComponent(mensagem)}`;
+            
+            window.open(urlWhatsapp, '_blank');
+        }
+    </script>
+</body>
+</html>
+
     </script>
 </body>
 </html>
