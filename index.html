@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -206,26 +206,26 @@
         <!-- Fim da Seção de Fotos -->
 
 
-        <div class="caixa" onclick="selecionar(this)">
+        <div class="caixa proposta-principal" onclick="selecionar(this, 'principal')">
             🎻 Proposta 1:<br>
             1 Violino<br>
             1 Violoncelo<br>
             1 Piano digital 
         </div>
-        <div class="caixa" onclick="selecionar(this)">
+        <div class="caixa proposta-principal" onclick="selecionar(this, 'principal')">
             🎻 Proposta 2:<br>
             2 Violinos<br>
             1 Viola<br>
             1 Violoncelo<br>
             1 Piano digital 
         </div>
-        <div class="caixa" onclick="selecionar(this)">
+        <div class="caixa proposta-principal" onclick="selecionar(this, 'principal')">
             🎻 Proposta 3:<br>
             2 Violinos<br>
             1 Violoncelo<br>
             1 Piano digital
         </div>
-        <div class="caixa" onclick="selecionar(this)">
+        <div class="caixa proposta-principal" onclick="selecionar(this, 'principal')">
             🎶 Para o jantar ou recepção (até 02h de música ao vivo):<br>
             1 Violino<br>
             1 Violão<br>
@@ -234,7 +234,7 @@
             1 Bateria<br>
             2 Vozes
         </div>
-        <div class="caixa" onclick="selecionar(this)">
+        <div class="caixa proposta-opcional" onclick="selecionar(this, 'opcional')">
             🎺 Opcionais Adicionais:<br>
             Clarins Triunfais - Trompetes (Entrada da noiva)<br>
             Cajón (percussão)<br>
@@ -250,16 +250,21 @@
     </main>
 
     <script>
-        let selecionada = null;
-        function selecionar(elemento) {
-            if (selecionada) {
-                selecionada.classList.remove('selecionada');
-            }
-            if (selecionada === elemento) {
-                selecionada = null; // Permite desmarcar a caixa
-            } else {
-                elemento.classList.add('selecionada');
-                selecionada = elemento;
+        function selecionar(elemento, tipo) {
+            if (tipo === 'principal') {
+                // Desmarca a proposta principal que já estava selecionada, se houver
+                const selecionadaAtual = document.querySelector('.proposta-principal.selecionada');
+                if (selecionadaAtual) {
+                    selecionadaAtual.classList.remove('selecionada');
+                }
+                
+                // Se o clique for em uma proposta diferente da que já estava selecionada, marca a nova
+                if (selecionadaAtual !== elemento) {
+                    elemento.classList.add('selecionada');
+                }
+            } else if (tipo === 'opcional') {
+                // Apenas alterna a classe do opcional, permitindo marcar e desmarcar
+                elemento.classList.toggle('selecionada');
             }
         }
 
@@ -270,23 +275,21 @@
             let email = document.getElementById('email').value;
             let detalhes = document.getElementById('detalhes').value;
             
-            let propostaSelecionada = "Nenhuma proposta selecionada.";
-            if (selecionada) {
-                // Limpa o texto para pegar apenas o conteúdo principal
-                propostaSelecionada = selecionada.innerText.trim();
+            const selecionados = document.querySelectorAll('.caixa.selecionada');
+            let propostasSelecionadas = "Nenhuma proposta selecionada.";
+
+            if (selecionados.length > 0) {
+                const textos = Array.from(selecionados).map(el => el.innerText.trim());
+                propostasSelecionadas = textos.join('\n+ ');
             }
 
-            let mensagem = `Olá, meu nome é ${nome} (${email}).\n\nGostaria de um orçamento para a seguinte formação:\n*${propostaSelecionada}*\n\nDetalhes do evento:\n${detalhes}`;
+            let mensagem = `Olá, meu nome é ${nome} (${email}).\n\nGostaria de um orçamento para a seguinte formação:\n\n${propostasSelecionadas}\n\nDetalhes do evento:\n${detalhes}`;
             
             let numeroWhatsapp = "5567981339514";
             let urlWhatsapp = `https://api.whatsapp.com/send?phone=${numeroWhatsapp}&text=${encodeURIComponent(mensagem)}`;
             
             window.open(urlWhatsapp, '_blank');
         }
-    </script>
-</body>
-</html>
-
     </script>
 </body>
 </html>
