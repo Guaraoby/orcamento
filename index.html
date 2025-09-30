@@ -65,19 +65,27 @@
         main {
             text-align: center;
             padding: 20px;
-            max-width: 1000px; /* Aumentei a largura máxima para acomodar mais fotos */
+            max-width: 1000px;
             margin: auto;
         }
 
         /* --- Estilos da Galeria de Inspiração --- */
-        .legenda-galeria {
-            font-size: 22px;
-            font-style: italic;
-            margin-top: 20px;
+        .legenda-galeria, .legenda-propostas {
+            font-size: 24px;
+            font-family: 'Trajan Pro', serif;
+            margin-top: 40px;
             margin-bottom: 25px;
             border-bottom: 1px solid #b08d57;
             padding-bottom: 10px;
             display: inline-block;
+            color: #fff;
+        }
+        
+        .sublegenda-propostas {
+            font-size: 18px;
+            font-style: italic;
+            margin-top: 30px;
+            margin-bottom: 20px;
         }
 
         .galeria-container {
@@ -130,7 +138,7 @@
             box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
         }
         form {
-            margin-top: 20px;
+            margin-top: 40px;
         }
         input, textarea, button {
             width: 100%;
@@ -186,54 +194,35 @@
         <!-- Seção de Fotos -->
         <h3 class="legenda-galeria">Inspire-se em alguns de nossos serviços</h3>
         <div class="galeria-container">
-            <div class="foto-galeria">
-                <img src="imagens/foto_casamento_1.jpg" alt="Músicos tocando violino e violoncelo ao ar livre">
-            </div>
-            <div class="foto-galeria">
-                <img src="imagens/foto_casamento_2.jpg" alt="Trio de músicos com violino, violoncelo e piano em ambiente interno">
-            </div>
-            <div class="foto-galeria">
-                <img src="imagens/foto_casamento_3.jpg" alt="Quarteto de cordas em apresentação de casamento">
-            </div>
-            <!-- NOVOS CAMPOS DE IMAGEM -->
-            <div class="foto-galeria">
-                <img src="imagens/foto_casamento_4.jpg" alt="Apresentação musical em evento corporativo">
-            </div>
-            <div class="foto-galeria">
-                <img src="imagens/foto_casamento_5.jpg" alt="Detalhe de músicos em recepção de jantar">
-            </div>
+            <div class="foto-galeria"><img src="imagens/foto_casamento_1.jpg" alt="Músicos tocando violino e violoncelo ao ar livre"></div>
+            <div class="foto-galeria"><img src="imagens/foto_casamento_2.jpg" alt="Trio de músicos com violino, violoncelo e piano em ambiente interno"></div>
+            <div class="foto-galeria"><img src="imagens/foto_casamento_3.jpg" alt="Quarteto de cordas em apresentação de casamento"></div>
+            <div class="foto-galeria"><img src="imagens/foto_casamento_4.jpg" alt="Apresentação musical em evento corporativo"></div>
+            <div class="foto-galeria"><img src="imagens/foto_casamento_5.jpg" alt="Detalhe de músicos em recepção de jantar"></div>
         </div>
         <!-- Fim da Seção de Fotos -->
 
-
+        <h3 class="legenda-propostas">Monte Sua Formação</h3>
+        
+        <p class="sublegenda-propostas">1. Escolha a formação principal para sua cerimônia ou recepção:</p>
         <div class="caixa proposta-principal" onclick="selecionar(this, 'principal')">
             🎻 Proposta 1:<br>
-            1 Violino<br>
-            1 Violoncelo<br>
-            1 Piano digital 
+            1 Violino, 1 Violoncelo e 1 Piano digital 
         </div>
         <div class="caixa proposta-principal" onclick="selecionar(this, 'principal')">
             🎻 Proposta 2:<br>
-            2 Violinos<br>
-            1 Viola<br>
-            1 Violoncelo<br>
-            1 Piano digital 
+            2 Violinos, 1 Viola, 1 Violoncelo e 1 Piano digital 
         </div>
         <div class="caixa proposta-principal" onclick="selecionar(this, 'principal')">
             🎻 Proposta 3:<br>
-            2 Violinos<br>
-            1 Violoncelo<br>
-            1 Piano digital
+            2 Violinos, 1 Violoncelo e 1 Piano digital
         </div>
         <div class="caixa proposta-principal" onclick="selecionar(this, 'principal')">
             🎶 Para o jantar ou recepção (até 02h de música ao vivo):<br>
-            1 Violino<br>
-            1 Violão<br>
-            1 Violoncelo<br>
-            1 Piano digital<br>
-            1 Bateria<br>
-            2 Vozes
+            1 Violino, 1 Violão, 1 Violoncelo, 1 Piano digital, 1 Bateria e 2 Vozes
         </div>
+        
+        <p class="sublegenda-propostas">2. Adicione opcionais para personalizar (pode selecionar junto com a formação principal):</p>
         <div class="caixa proposta-opcional" onclick="selecionar(this, 'opcional')">
             🎺 Opcionais Adicionais:<br>
             Clarins Triunfais - Trompetes (Entrada da noiva)<br>
@@ -259,6 +248,7 @@
                 }
                 
                 // Se o clique for em uma proposta diferente da que já estava selecionada, marca a nova
+                // Se for na mesma, ela fica desmarcada (efeito toggle)
                 if (selecionadaAtual !== elemento) {
                     elemento.classList.add('selecionada');
                 }
@@ -293,3 +283,4 @@
     </script>
 </body>
 </html>
+
