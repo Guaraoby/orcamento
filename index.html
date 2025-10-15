@@ -69,7 +69,6 @@
             margin: auto;
         }
 
-        /* --- Estilos da Galeria de Inspiração --- */
         .legenda-galeria, .legenda-propostas {
             font-size: 24px;
             font-family: 'Trajan Pro', serif;
@@ -91,34 +90,39 @@
         .galeria-container {
             display: flex;
             justify-content: center;
-            gap: 25px; /* Espaçamento entre as fotos */
-            flex-wrap: wrap; /* Para que as fotos quebrem a linha em telas menores */
-            margin: 40px 0; /* Espaçamento acima e abaixo da galeria */
+            gap: 25px;
+            flex-wrap: wrap;
+            margin: 40px 0;
         }
 
         .foto-galeria {
-            width: 250px; /* Largura da foto */
-            height: 250px; /* Altura da foto */
-            border-radius: 15px; /* Bordas arredondadas */
-            overflow: hidden; /* Garante que a imagem não saia das bordas arredondadas */
-            border: 3px solid #b08d57; /* Borda dourada luxuosa */
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); /* Sombra para dar profundidade */
+            width: 250px;
+            height: 250px;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 3px solid #b08d57;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .foto-galeria:hover {
-            transform: scale(1.05); /* Efeito de zoom ao passar o mouse */
-            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4); /* Sombra dourada no hover */
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
         }
 
         .foto-galeria img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Faz a imagem cobrir todo o espaço sem distorcer */
+            object-fit: cover;
         }
 
+        /* Estilos para os cartões de seleção */
+        .secao-propostas {
+            margin-bottom: 40px;
+        }
 
-        .caixa {
+        .cartao-proposta {
+            display: block; /* Para a label ocupar a largura toda */
             border: 2px solid #b08d57;
             padding: 20px;
             margin: 15px auto;
@@ -128,20 +132,39 @@
             transition: all 0.3s ease;
             background-color: rgba(0, 0, 0, 0.4);
             line-height: 1.6;
+            text-align: left;
         }
-        .caixa:hover {
-            background-color: rgba(176, 141, 87, 0.1);
+
+        .cartao-proposta strong {
+            font-size: 1.1em;
+            color: #fff;
+            display: block;
+            margin-bottom: 8px;
         }
-        .caixa.selecionada {
+
+        /* Esconde os inputs originais */
+        .secao-propostas input[type="radio"],
+        .secao-propostas input[type="checkbox"] {
+            display: none;
+        }
+
+        /* Estilo quando o cartão é selecionado */
+        .secao-propostas input:checked + .cartao-proposta {
             background-color: rgba(176, 141, 87, 0.2);
             border-color: gold;
             box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
         }
+        
+        .cartao-proposta:hover {
+            background-color: rgba(176, 141, 87, 0.1);
+        }
+
         form {
             margin-top: 40px;
         }
         input, textarea, button {
             width: 100%;
+            max-width: 544px; /* Alinha com os cartões */
             padding: 12px;
             margin: 8px 0;
             border: 1px solid #b08d57;
@@ -177,10 +200,6 @@
         <svg class="icone-musical" style="top:5%; left:10%;" viewBox="0 0 64 64"><path d="M52 4v40.7c-2.4-1.3-5.3-2.1-8.5-2.1-8.3 0-15 5.4-15 12s6.7 12 15 12 15-5.4 15-12V16h8V4H52z"/></svg>
         <svg class="icone-musical" style="top:15%; left:70%; animation-delay: -2s;" viewBox="0 0 64 64"><path d="M50 14l-4-4-6 6-2-2 6-6-4-4L22 22l4 4-6 6 2 2 6-6 4 4-6 6 4 4L50 14z"/></svg>
         <svg class="icone-musical" style="top:25%; left:30%; animation-delay: -4s;" viewBox="0 0 64 64"><path d="M52 4v40.7c-2.4-1.3-5.3-2.1-8.5-2.1-8.3 0-15 5.4-15 12s6.7 12 15 12 15-5.4 15-12V16h8V4H52z"/></svg>
-        <svg class="icone-musical" style="top:35%; left:80%; animation-delay: -6s;" viewBox="0 0 64 64"><path d="M50 14l-4-4-6 6-2-2 6-6-4-4L22 22l4 4-6 6 2 2 6-6 4 4-6 6 4 4L50 14z"/></svg>
-        <svg class="icone-musical" style="top:45%; left:20%; animation-delay: -8s;" viewBox="0 0 64 64"><path d="M52 4v40.7c-2.4-1.3-5.3-2.1-8.5-2.1-8.3 0-15 5.4-15 12s6.7 12 15 12 15-5.4 15-12V16h8V4H52z"/></svg>
-        <svg class="icone-musical" style="top:75%; left:10%; animation-delay: -10s;" viewBox="0 0 64 64"><path d="M50 14l-4-4-6 6-2-2 6-6-4-4L22 22l4 4-6 6 2 2 6-6 4 4-6 6 4 4L50 14z"/></svg>
-        <svg class="icone-musical" style="top:85%; left:70%; animation-delay: -12s;" viewBox="0 0 64 64"><path d="M52 4v40.7c-2.4-1.3-5.3-2.1-8.5-2.1-8.3 0-15 5.4-15 12s6.7 12 15 12 15-5.4 15-12V16h8V4H52z"/></svg>
     </div>
 
     <header>
@@ -191,49 +210,67 @@
         <h2>Entre notas e votos</h2>
         <p>O valor do serviço pode variar de acordo com a cidade, estrutura disponível e formação instrumental escolhida.</p>
 
-        <!-- Seção de Fotos -->
         <h3 class="legenda-galeria">Inspire-se em alguns de nossos serviços</h3>
         <div class="galeria-container">
-            <div class="foto-galeria"><img src="imagens/foto_casamento_1.jpg" alt="Foto de casamento com músicos 1"></div>
-            <div class="foto-galeria"><img src="imagens/foto_casamento_2.jpg" alt="Foto de casamento com músicos 2"></div>
-            <div class="foto-galeria"><img src="imagens/foto_casamento_3.jpg" alt="Foto de casamento com músicos 3"></div>
-            <div class="foto-galeria"><img src="imagens/foto_casamento_4.jpg" alt="Foto de casamento com músicos 4"></div>
-            <div class="foto-galeria"><img src="imagens/foto_casamento_5.jpg" alt="Foto de casamento com músicos 5"></div>
-        </div>
-        <!-- Fim da Seção de Fotos -->
-
-        <h3 class="legenda-propostas">Monte Sua Formação</h3>
-        
-        <p class="sublegenda-propostas">1. Escolha a formação principal (selecione apenas uma):</p>
-        <div class="caixa proposta-principal" onclick="selecionar(this, 'principal')">
-            <strong>"Formação Singela"</strong><br>
-            1 Violino, 1 Violoncelo e 1 Piano digital 
-        </div>
-        <div class="caixa proposta-principal" onclick="selecionar(this, 'principal')">
-            <strong>"Quarteto de Cordas Clássico"</strong><br>
-            2 Violinos, 1 Viola e 1 Violoncelo
-        </div>
-        <div class="caixa proposta-principal" onclick="selecionar(this, 'principal')">
-            <strong>"Quarteto Versátil"</strong><br>
-            2 Violinos, 1 Violoncelo e 1 Piano digital
-        </div>
-        <div class="caixa proposta-principal" onclick="selecionar(this, 'principal')">
-            <strong>"Formação Orquestral"</strong><br>
-            4 Violinos, 1 Viola, 1 Violoncelo e 1 Piano
+            <div class="foto-galeria"><img src="imagens/foto_casamento_1.jpg" alt="Músicos em um casamento"></div>
+            <div class="foto-galeria"><img src="imagens/foto_casamento_2.jpg" alt="Músicos em um casamento"></div>
+            <div class="foto-galeria"><img src="imagens/foto_casamento_3.jpg" alt="Músicos em um casamento"></div>
+            <div class="foto-galeria"><img src="imagens/foto_casamento_4.jpg" alt="Músicos em um casamento"></div>
+            <div class="foto-galeria"><img src="imagens/foto_casamento_5.jpg" alt="Músicos em um casamento"></div>
         </div>
         
-        <p class="sublegenda-propostas">2. Adicione opcionais (selecione quantos desejar):</p>
-        <div class="caixa proposta-opcional" onclick="selecionar(this, 'opcional')">
-            🎺 <strong>Clarins Triunfais</strong>
-        </div>
-        <div class="caixa proposta-opcional" onclick="selecionar(this, 'opcional')">
-            🥁 <strong>Cajón</strong> (Percussão)
-        </div>
-        <div class="caixa proposta-opcional" onclick="selecionar(this, 'opcional')">
-            🎤 <strong>Cantores</strong> (1 ou 2 vozes)
-        </div>
+        <form id="orcamentoForm" onsubmit="prepararMensagem(event)">
+            <h3 class="legenda-propostas">Monte sua formação musical</h3>
+            
+            <!-- Tópico 1: Formações Principais (Radio) -->
+            <div class="secao-propostas">
+                <p class="sublegenda-propostas">1. Escolha a formação principal (selecione apenas uma):</p>
+                
+                <input type="radio" id="formacao1" name="formacao_principal" value="Formação Singela: 1 Violino, 1 Violoncelo, 1 Piano Digital">
+                <label for="formacao1" class="cartao-proposta">
+                    <strong>Formação Singela</strong>
+                    1 Violino, 1 Violoncelo, 1 Piano Digital
+                </label>
 
-        <form onsubmit="prepararMensagem(event)">
+                <input type="radio" id="formacao2" name="formacao_principal" value="Quarteto de Cordas Clássico: 2 Violinos, 1 Viola, 1 Violoncelo">
+                <label for="formacao2" class="cartao-proposta">
+                    <strong>Quarteto de Cordas Clássico</strong>
+                    2 Violinos, 1 Viola, 1 Violoncelo
+                </label>
+
+                <input type="radio" id="formacao3" name="formacao_principal" value="Quarteto Versátil: 2 Violinos, 1 Violoncelo, 1 Piano Digital">
+                <label for="formacao3" class="cartao-proposta">
+                    <strong>Quarteto Versátil</strong>
+                    2 Violinos, 1 Violoncelo, 1 Piano Digital
+                </label>
+
+                <input type="radio" id="formacao4" name="formacao_principal" value="Formação Orquestral: 4 Violinos, 1 Viola, 1 Violoncelo, 1 Piano">
+                <label for="formacao4" class="cartao-proposta">
+                    <strong>Formação Orquestral</strong>
+                    4 Violinos, 1 Viola, 1 Violoncelo, 1 Piano
+                </label>
+            </div>
+
+            <!-- Tópico 2: Opcionais (Checkbox) -->
+            <div class="secao-propostas">
+                <p class="sublegenda-propostas">2. Adicione opcionais (selecione quantos desejar):</p>
+
+                <input type="checkbox" id="opcional1" name="opcional" value="Clarins Triunfais">
+                <label for="opcional1" class="cartao-proposta">
+                    <strong>🎺 Clarins Triunfais</strong>
+                </label>
+
+                <input type="checkbox" id="opcional2" name="opcional" value="Cajón (percussão leve)">
+                <label for="opcional2" class="cartao-proposta">
+                    <strong>🥁 Cajón (percussão leve)</strong>
+                </label>
+                
+                <input type="checkbox" id="opcional3" name="opcional" value="Cantores (1 ou 2 vozes)">
+                <label for="opcional3" class="cartao-proposta">
+                    <strong>🎤 Cantores (1 ou 2 vozes)</strong>
+                </label>
+            </div>
+            
             <input type="text" id="nome" placeholder="Seu nome" required>
             <input type="email" id="email" placeholder="Seu email" required>
             <textarea id="detalhes" placeholder="Detalhes do evento (Data, Local, etc)" required></textarea>
@@ -242,25 +279,6 @@
     </main>
 
     <script>
-        function selecionar(elemento, tipo) {
-            if (tipo === 'principal') {
-                // Desmarca a proposta principal que já estava selecionada, se houver
-                const selecionadaAtual = document.querySelector('.proposta-principal.selecionada');
-                if (selecionadaAtual) {
-                    selecionadaAtual.classList.remove('selecionada');
-                }
-                
-                // Se o clique for em uma proposta diferente da que já estava selecionada, marca a nova
-                // Se for na mesma, ela fica desmarcada (efeito toggle)
-                if (selecionadaAtual !== elemento) {
-                    elemento.classList.add('selecionada');
-                }
-            } else if (tipo === 'opcional') {
-                // Apenas alterna a classe do opcional, permitindo marcar e desmarcar
-                elemento.classList.toggle('selecionada');
-            }
-        }
-
         function prepararMensagem(event) {
             event.preventDefault(); // Impede o envio padrão do formulário
             
@@ -268,19 +286,26 @@
             let email = document.getElementById('email').value;
             let detalhes = document.getElementById('detalhes').value;
             
-            const selecionados = document.querySelectorAll('.caixa.selecionada');
-            let propostasSelecionadas = "Nenhuma proposta selecionada.";
+            let mensagemFinal = [];
 
-            if (selecionados.length > 0) {
-                // Mapeia os elementos selecionados para pegar o texto de forma limpa
-                const textos = Array.from(selecionados).map(el => {
-                    // Substitui quebras de linha por espaço e remove espaços extras
-                    return el.innerText.trim().replace(/\s+/g, ' ');
-                });
-                propostasSelecionadas = "+ " + textos.join('\n+ ');
+            // Pega a formação principal selecionada
+            const principalSelecionada = document.querySelector('input[name="formacao_principal"]:checked');
+            if (principalSelecionada) {
+                mensagemFinal.push(`*Formação Principal:*\n${principalSelecionada.value}`);
+            } else {
+                 mensagemFinal.push(`*Formação Principal:*\nNenhuma selecionada.`);
             }
 
-            let mensagem = `Olá, meu nome é ${nome} (${email}).\n\nGostaria de um orçamento para a seguinte formação:\n\n${propostasSelecionadas}\n\nDetalhes do evento:\n${detalhes}`;
+            // Pega os opcionais selecionados
+            const opcionaisSelecionados = document.querySelectorAll('input[name="opcional"]:checked');
+            if (opcionaisSelecionados.length > 0) {
+                let textoOpcionais = Array.from(opcionaisSelecionados).map(el => `- ${el.value}`).join('\n');
+                mensagemFinal.push(`\n*Opcionais Adicionais:*\n${textoOpcionais}`);
+            }
+            
+            let propostasSelecionadas = mensagemFinal.join('');
+
+            let mensagem = `Olá, meu nome é ${nome} (${email}).\n\nGostaria de um orçamento para a seguinte formação:\n\n${propostasSelecionadas}\n\n*Detalhes do evento:*\n${detalhes}`;
             
             let numeroWhatsapp = "5567981339514";
             let urlWhatsapp = `https://api.whatsapp.com/send?phone=${numeroWhatsapp}&text=${encodeURIComponent(mensagem)}`;
