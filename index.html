@@ -194,40 +194,44 @@
         <!-- Seção de Fotos -->
         <h3 class="legenda-galeria">Inspire-se em alguns de nossos serviços</h3>
         <div class="galeria-container">
-            <div class="foto-galeria"><img src="imagens/foto_casamento_1.jpg" alt="Músicos tocando violino e violoncelo ao ar livre"></div>
-            <div class="foto-galeria"><img src="imagens/foto_casamento_2.jpg" alt="Trio de músicos com violino, violoncelo e piano em ambiente interno"></div>
-            <div class="foto-galeria"><img src="imagens/foto_casamento_3.jpg" alt="Quarteto de cordas em apresentação de casamento"></div>
-            <div class="foto-galeria"><img src="imagens/foto_casamento_4.jpg" alt="Apresentação musical em evento corporativo"></div>
-            <div class="foto-galeria"><img src="imagens/foto_casamento_5.jpg" alt="Detalhe de músicos em recepção de jantar"></div>
+            <!-- As imagens precisam estar na pasta /imagens ou ter a URL completa -->
+            <div class="foto-galeria"><img src="https://placehold.co/250x250/333/b08d57?text=Casamento+1" alt="Músicos tocando violino e violoncelo ao ar livre"></div>
+            <div class="foto-galeria"><img src="https://placehold.co/250x250/444/b08d57?text=Casamento+2" alt="Trio de músicos com violino, violoncelo e piano em ambiente interno"></div>
+            <div class="foto-galeria"><img src="https://placehold.co/250x250/555/b08d57?text=Casamento+3" alt="Quarteto de cordas em apresentação de casamento"></div>
+            <div class="foto-galeria"><img src="https://placehold.co/250x250/666/b08d57?text=Corporativo" alt="Apresentação musical em evento corporativo"></div>
+            <div class="foto-galeria"><img src="https://placehold.co/250x250/777/b08d57?text=Recep%C3%A7%C3%A3o" alt="Detalhe de músicos em recepção de jantar"></div>
         </div>
         <!-- Fim da Seção de Fotos -->
 
         <h3 class="legenda-propostas">Monte Sua Formação</h3>
         
-        <p class="sublegenda-propostas">1. Escolha a formação principal para sua cerimônia ou recepção:</p>
+        <p class="sublegenda-propostas">1. Escolha a formação principal para sua cerimônia ou recepção (selecione apenas uma):</p>
         <div class="caixa proposta-principal" onclick="selecionar(this, 'principal')">
-            🎻 Proposta 1:<br>
+            <strong>Formação Singela</strong><br>
             1 Violino, 1 Violoncelo e 1 Piano digital 
         </div>
         <div class="caixa proposta-principal" onclick="selecionar(this, 'principal')">
-            🎻 Proposta 2:<br>
-            2 Violinos, 1 Viola, 1 Violoncelo e 1 Piano digital 
+            <strong>Quarteto de Cordas Clássico</strong><br>
+            2 Violinos, 1 Viola e 1 Violoncelo
         </div>
         <div class="caixa proposta-principal" onclick="selecionar(this, 'principal')">
-            🎻 Proposta 3:<br>
+            <strong>Quarteto Versátil</strong><br>
             2 Violinos, 1 Violoncelo e 1 Piano digital
         </div>
         <div class="caixa proposta-principal" onclick="selecionar(this, 'principal')">
-            🎶 Para o jantar ou recepção (até 02h de música ao vivo):<br>
-            1 Violino, 1 Violão, 1 Violoncelo, 1 Piano digital, 1 Bateria e 2 Vozes
+            <strong>Formação Orquestral</strong><br>
+            4 Violinos, 1 Viola, 1 Violoncelo e 1 Piano digital
         </div>
         
-        <p class="sublegenda-propostas">2. Adicione opcionais para personalizar (pode selecionar junto com a formação principal):</p>
+        <p class="sublegenda-propostas">2. Adicione opcionais para personalizar (selecione quantos desejar):</p>
         <div class="caixa proposta-opcional" onclick="selecionar(this, 'opcional')">
-            🎺 Opcionais Adicionais:<br>
-            Clarins Triunfais - Trompetes (Entrada da noiva)<br>
-            Cajón (percussão)<br>
-            Cantores
+            🎺 <strong>Clarins Triunfais</strong> (Trompetes para entrada da noiva)
+        </div>
+        <div class="caixa proposta-opcional" onclick="selecionar(this, 'opcional')">
+            🥁 <strong>Cajón</strong> (Percussão)
+        </div>
+        <div class="caixa proposta-opcional" onclick="selecionar(this, 'opcional')">
+            🎤 <strong>Cantores</strong> (1 ou 2 vozes)
         </div>
 
         <form onsubmit="prepararMensagem(event)">
@@ -269,18 +273,21 @@
             let propostasSelecionadas = "Nenhuma proposta selecionada.";
 
             if (selecionados.length > 0) {
-                const textos = Array.from(selecionados).map(el => el.innerText.trim());
-                propostasSelecionadas = textos.join('\n+ ');
+                // Mapeia os elementos selecionados para pegar o texto de forma limpa
+                const textos = Array.from(selecionados).map(el => {
+                    // Substitui quebras de linha por espaço e remove espaços extras
+                    return el.innerText.trim().replace(/\s+/g, ' ');
+                });
+                propostasSelecionadas = "+ " + textos.join('\n+ ');
             }
 
-            let mensagem = `Olá, meu nome é ${nome} (${email}).\n\nGostaria de um orçamento para a seguinte formação:\n\n${propostasSelecionadas}\n\nDetalhes do evento:\n${detalhes}`;
+            let mensagem = Olá, meu nome é ${nome} (${email}).\n\nGostaria de um orçamento para a seguinte formação:\n\n${propostasSelecionadas}\n\nDetalhes do evento:\n${detalhes};
             
             let numeroWhatsapp = "5567981339514";
-            let urlWhatsapp = `https://api.whatsapp.com/send?phone=${numeroWhatsapp}&text=${encodeURIComponent(mensagem)}`;
+            let urlWhatsapp = https://api.whatsapp.com/send?phone=${numeroWhatsapp}&text=${encodeURIComponent(mensagem)};
             
             window.open(urlWhatsapp, '_blank');
         }
     </script>
 </body>
 </html>
-
