@@ -194,37 +194,37 @@
         <!-- Seção de Fotos -->
         <h3 class="legenda-galeria">Inspire-se em alguns de nossos serviços</h3>
         <div class="galeria-container">
-            <div class="foto-galeria"><img src="imagens/foto_casamento_1.jpg" alt="Músicos em um casamento"></div>
-            <div class="foto-galeria"><img src="imagens/foto_casamento_2.jpg" alt="Músicos em um casamento"></div>
-            <div class="foto-galeria"><img src="imagens/foto_casamento_3.jpg" alt="Músicos em um casamento"></div>
-            <div class="foto-galeria"><img src="imagens/foto_casamento_4.jpg" alt="Músicos em um casamento"></div>
-            <div class="foto-galeria"><img src="imagens/foto_casamento_5.jpg" alt="Músicos em um casamento"></div>
+            <div class="foto-galeria"><img src="imagens/foto_casamento_1.jpg" alt="Foto de casamento com músicos 1"></div>
+            <div class="foto-galeria"><img src="imagens/foto_casamento_2.jpg" alt="Foto de casamento com músicos 2"></div>
+            <div class="foto-galeria"><img src="imagens/foto_casamento_3.jpg" alt="Foto de casamento com músicos 3"></div>
+            <div class="foto-galeria"><img src="imagens/foto_casamento_4.jpg" alt="Foto de casamento com músicos 4"></div>
+            <div class="foto-galeria"><img src="imagens/foto_casamento_5.jpg" alt="Foto de casamento com músicos 5"></div>
         </div>
         <!-- Fim da Seção de Fotos -->
 
         <h3 class="legenda-propostas">Monte Sua Formação</h3>
         
-        <p class="sublegenda-propostas">1. Escolha a formação principal para sua cerimônia ou recepção (selecione apenas uma):</p>
+        <p class="sublegenda-propostas">1. Escolha a formação principal (selecione apenas uma):</p>
         <div class="caixa proposta-principal" onclick="selecionar(this, 'principal')">
-            <strong>Formação Singela</strong><br>
+            <strong>"Formação Singela"</strong><br>
             1 Violino, 1 Violoncelo e 1 Piano digital 
         </div>
         <div class="caixa proposta-principal" onclick="selecionar(this, 'principal')">
-            <strong>Quarteto de Cordas Clássico</strong><br>
+            <strong>"Quarteto de Cordas Clássico"</strong><br>
             2 Violinos, 1 Viola e 1 Violoncelo
         </div>
         <div class="caixa proposta-principal" onclick="selecionar(this, 'principal')">
-            <strong>Quarteto Versátil</strong><br>
+            <strong>"Quarteto Versátil"</strong><br>
             2 Violinos, 1 Violoncelo e 1 Piano digital
         </div>
         <div class="caixa proposta-principal" onclick="selecionar(this, 'principal')">
-            <strong>Formação Orquestral</strong><br>
-            4 Violinos, 1 Viola, 1 Violoncelo e 1 Piano digital
+            <strong>"Formação Orquestral"</strong><br>
+            4 Violinos, 1 Viola, 1 Violoncelo e 1 Piano
         </div>
         
-        <p class="sublegenda-propostas">2. Adicione opcionais para personalizar (selecione quantos desejar):</p>
+        <p class="sublegenda-propostas">2. Adicione opcionais (selecione quantos desejar):</p>
         <div class="caixa proposta-opcional" onclick="selecionar(this, 'opcional')">
-            🎺 <strong>Clarins Triunfais</strong> (Trompetes para entrada da noiva)
+            🎺 <strong>Clarins Triunfais</strong>
         </div>
         <div class="caixa proposta-opcional" onclick="selecionar(this, 'opcional')">
             🥁 <strong>Cajón</strong> (Percussão)
@@ -280,10 +280,10 @@
                 propostasSelecionadas = "+ " + textos.join('\n+ ');
             }
 
-            let mensagem = Olá, meu nome é ${nome} (${email}).\n\nGostaria de um orçamento para a seguinte formação:\n\n${propostasSelecionadas}\n\nDetalhes do evento:\n${detalhes};
+            let mensagem = `Olá, meu nome é ${nome} (${email}).\n\nGostaria de um orçamento para a seguinte formação:\n\n${propostasSelecionadas}\n\nDetalhes do evento:\n${detalhes}`;
             
             let numeroWhatsapp = "5567981339514";
-            let urlWhatsapp = https://api.whatsapp.com/send?phone=${numeroWhatsapp}&text=${encodeURIComponent(mensagem)};
+            let urlWhatsapp = `https://api.whatsapp.com/send?phone=${numeroWhatsapp}&text=${encodeURIComponent(mensagem)}`;
             
             window.open(urlWhatsapp, '_blank');
         }
