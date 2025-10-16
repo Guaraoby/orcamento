@@ -19,7 +19,7 @@
             font-family: 'Cormorant Garamond', serif;
         }
         .hero-bg {
-            background-image: linear-gradient(to bottom, rgba(17, 17, 17, 0.9), rgba(17, 17, 17, 1)), url('https://placehold.co/1920x1080/1a1a1a/666666?text=Guaraoby+Performance');
+            background-image: linear-gradient(rgba(17, 17, 17, 0.85), rgba(17, 17, 17, 0.85)), url('./imagens/foto_casamento_fundo.jpg');
             background-size: cover;
             background-position: center;
         }
@@ -67,6 +67,52 @@
             background-color: rgba(212, 175, 55, 0.1);
             color: #D4AF37;
         }
+
+        /* --- ESTILOS DO PLAYER DE ÁUDIO --- */
+        #audio-player-container {
+            margin-top: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+        #play-pause-btn {
+            background-color: transparent;
+            border: 2px solid #D4AF37;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        #play-pause-btn:hover {
+            background-color: rgba(212, 175, 55, 0.1);
+            transform: scale(1.1);
+        }
+        #play-pause-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: #D4AF37;
+        }
+        #pause-icon {
+            display: none;
+        }
+        #song-info {
+            text-align: left;
+            color: #EAEAEA;
+        }
+        #song-title {
+            font-weight: bold;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.25rem;
+        }
+        #song-artist {
+            font-size: 0.9rem;
+            color: #9ca3af;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -78,9 +124,10 @@
             <nav class="hidden md:flex space-x-8">
                 <a href="#servicos" class="text-white hover:text-gold-text transition-colors">Serviços</a>
                 <a href="#portfolio" class="text-white hover:text-gold-text transition-colors">Portfólio</a>
+                <a href="#depoimentos" class="text-white hover:text-gold-text transition-colors">Depoimentos</a>
                 <a href="#contato" class="gold-bg text-black font-bold py-2 px-4 rounded-full hover:bg-opacity-90 transition-all">Orçamento</a>
             </nav>
-            <button class="md:hidden text-white" id="mobile-menu-button">
+            <button class="md-hidden text-white" id="mobile-menu-button">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
             </button>
         </div>
@@ -88,6 +135,7 @@
         <div id="mobile-menu" class="hidden md:hidden bg-black/80">
             <a href="#servicos" class="block text-center text-white py-3">Serviços</a>
             <a href="#portfolio" class="block text-center text-white py-3">Portfólio</a>
+            <a href="#depoimentos" class="block text-center text-white py-3">Depoimentos</a>
             <a href="#contato" class="block text-center text-white py-3 gold-bg font-bold">Orçamento</a>
         </div>
     </header>
@@ -95,11 +143,24 @@
     <!-- Seção Hero -->
     <section class="hero-bg min-h-screen flex items-center justify-center text-center">
         <div class="container mx-auto px-6 reveal visible">
-             <!-- Logo do Guaraoby - CAMINHO CORRIGIDO E TAMANHO AUMENTADO -->
+             <!-- Logo do Guaraoby -->
             <img src="./imagens/foto_guaraoby.jpg" alt="Logo Guaraoby" class="mx-auto h-60 md:h-80 w-auto mb-4">
             <h2 class="text-3xl md:text-5xl font-serif-display text-gray-300">Entre notas e votos</h2>
             <p class="text-xl md:text-2xl mt-8 max-w-3xl mx-auto text-white">Música que transforma momentos.</p>
             <p class="text-lg md:text-xl mt-4 max-w-3xl mx-auto text-gray-400">Atuamos em eventos desde 2010, com ensaios semanais para garantir uma qualidade impecável para o seu momento especial.</p>
+        
+            <!-- Player de Áudio -->
+            <div id="audio-player-container">
+                <audio id="audio-player" src="./audio/musica_exemplo.mp3"></audio>
+                <button id="play-pause-btn">
+                    <svg id="play-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
+                    <svg id="pause-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8 7a1 1 0 00-1 1v4a1 1 0 001 1h4a1 1 0 001-1V8a1 1 0 00-1-1H8z" clip-rule="evenodd"></path></svg>
+                </button>
+                <div id="song-info">
+                    <p id="song-title">Hallelujah</p>
+                    <p id="song-artist">Arranjo por Guaraoby</p>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -119,7 +180,7 @@
                 </div>
                 <!-- Card Serviço 2 -->
                 <div class="reveal p-8 border border-gray-700 rounded-lg bg-[#111] hover:border-gold-text hover:-translate-y-2 transition-all duration-300" style="transition-delay: 200ms;">
-                    <svg class="w-12 h-12 mx-auto gold-text" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 S0 0011 1v5m-4 0h4"></path></svg>
+                    <svg class="w-12 h-12 mx-auto gold-text" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
                     <h4 class="text-2xl font-serif-display font-bold mt-4">Eventos Corporativos</h4>
                     <p class="mt-2 text-gray-400">Adicione um toque de classe ao seu evento, com um repertório que se adapta à sua marca.</p>
                 </div>
@@ -146,35 +207,91 @@
                 <h3 class="text-4xl font-serif-display font-bold">Nosso Trabalho em Ação</h3>
                 <p class="mt-2 text-gray-400 max-w-2xl mx-auto">Imagens que capturam a emoção que nossa música proporciona.</p>
             </div>
-            <!-- Galeria com CAMINHOS CORRIGIDOS -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mt-12">
-                <!-- Coluna 1 -->
-                <div class="flex flex-col gap-4 md:gap-6 reveal">
-                    <img class="h-auto w-full object-cover rounded-lg hover:scale-105 transition-transform duration-300" src="./imagens/foto_casamento_1.jpg" alt="[Imagem de casamento 1]">
-                    <img class="h-auto w-full object-cover rounded-lg hover:scale-105 transition-transform duration-300" src="./imagens/foto_casamento_2.jpg" alt="[Imagem de casamento 2]">
-                    <img class="h-auto w-full object-cover rounded-lg hover:scale-105 transition-transform duration-300" src="./imagens/foto_casamento_3.jpg" alt="[Imagem de casamento 3]">
-                    <img class="h-auto w-full object-cover rounded-lg hover:scale-105 transition-transform duration-300" src="./imagens/foto_casamento_4.jpg" alt="[Imagem de casamento 4]">
+            <!-- Galeria com tamanho reduzido -->
+            <div class="max-w-4xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mt-12">
+                    <!-- Coluna 1 -->
+                    <div class="flex flex-col gap-4 md:gap-6 reveal">
+                        <img class="h-auto w-full object-cover rounded-lg hover:scale-105 transition-transform duration-300" src="./imagens/foto_casamento_1.jpg" alt="[Imagem de casamento 1]">
+                        <img class="h-auto w-full object-cover rounded-lg hover:scale-105 transition-transform duration-300" src="./imagens/foto_casamento_2.jpg" alt="[Imagem de casamento 2]">
+                        <img class="h-auto w-full object-cover rounded-lg hover:scale-105 transition-transform duration-300" src="./imagens/foto_casamento_3.jpg" alt="[Imagem de casamento 3]">
+                        <img class="h-auto w-full object-cover rounded-lg hover:scale-105 transition-transform duration-300" src="./imagens/foto_casamento_4.jpg" alt="[Imagem de casamento 4]">
+                    </div>
+                    <!-- Coluna 2 -->
+                    <div class="flex flex-col gap-4 md:gap-6 reveal" style="transition-delay: 200ms;">
+                        <img class="h-auto w-full object-cover rounded-lg hover:scale-105 transition-transform duration-300" src="./imagens/foto_casamento_5.jpg" alt="[Imagem de casamento 5]">
+                        <img class="h-auto w-full object-cover rounded-lg hover:scale-105 transition-transform duration-300" src="./imagens/foto_casamento_6.jpg" alt="[Imagem de casamento 6]">
+                        <img class="h-auto w-full object-cover rounded-lg hover:scale-105 transition-transform duration-300" src="./imagens/foto_casamento_7.jpg" alt="[Imagem de casamento 7]">
+                        <img class="h-auto w-full object-cover rounded-lg hover:scale-105 transition-transform duration-300" src="./imagens/foto_casamento_8.jpg" alt="[Imagem de casamento 8]">
+                    </div>
                 </div>
-                <!-- Coluna 2 -->
-                <div class="flex flex-col gap-4 md:gap-6 reveal" style="transition-delay: 200ms;">
-                    <img class="h-auto w-full object-cover rounded-lg hover:scale-105 transition-transform duration-300" src="./imagens/foto_casamento_5.jpg" alt="[Imagem de casamento 5]">
-                    <img class="h-auto w-full object-cover rounded-lg hover:scale-105 transition-transform duration-300" src="./imagens/foto_casamento_6.jpg" alt="[Imagem de casamento 6]">
-                    <img class="h-auto w-full object-cover rounded-lg hover:scale-105 transition-transform duration-300" src="./imagens/foto_casamento_7.jpg" alt="[Imagem de casamento 7]">
-                    <img class="h-auto w-full object-cover rounded-lg hover:scale-105 transition-transform duration-300" src="./imagens/foto_casamento_8.jpg" alt="[Imagem de casamento 8]">
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Depoimentos -->
+    <section id="depoimentos" class="py-20 bg-[#1a1a1a]">
+        <div class="container mx-auto px-6 text-center">
+            <div class="reveal">
+                <h3 class="text-4xl font-serif-display font-bold">O Que Nossos Clientes Dizem</h3>
+                <p class="mt-2 text-gray-400 max-w-2xl mx-auto">A trilha sonora perfeita para momentos inesquecíveis.</p>
+            </div>
+            <div class="grid md:grid-cols-1 lg:grid-cols-3 gap-8 mt-12 max-w-5xl mx-auto">
+                <!-- Depoimento 1 -->
+                <div class="reveal bg-[#111] p-8 rounded-lg border border-gray-700 relative hover:border-gold-text transition-colors duration-300">
+                    <svg class="absolute top-4 left-4 w-12 h-12 text-gray-700 opacity-50" fill="currentColor" viewBox="0 0 20 20"><path d="M10.422 2.032a.75.75 0 00-1.064 1.064l1.432 1.432a.75.75 0 001.064-1.064L10.422 2.032zM8.25 5.25a.75.75 0 00-1.5 0v3a.75.75 0 001.5 0v-3zM10.879 2.44a.75.75 0 00-1.06 0l-7.5 7.5a.75.75 0 000 1.06l7.5 7.5a.75.75 0 001.06-1.06L4.31 11.5h11.44a.75.75 0 000-1.5H4.31l6.57-6.56a.75.75 0 000-1.06z"></path></svg>
+                    <div class="flex justify-center mb-4 text-gold-text">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <!-- Repeat 4 more times -->
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    </div>
+                    <p class="text-gray-400 italic">"Contratar o Guaraoby foi a melhor decisão para o nosso casamento. A música foi emocionante e todos os convidados elogiaram. Profissionalismo e talento incríveis!"</p>
+                    <p class="mt-4 font-bold font-serif-display text-lg">- Amanda & Lucas</p>
+                </div>
+                <!-- Depoimento 2 -->
+                <div class="reveal bg-[#111] p-8 rounded-lg border border-gray-700 relative hover:border-gold-text transition-colors duration-300" style="transition-delay: 200ms;">
+                    <svg class="absolute top-4 left-4 w-12 h-12 text-gray-700 opacity-50" fill="currentColor" viewBox="0 0 20 20"><path d="M10.422 2.032a.75.75 0 00-1.064 1.064l1.432 1.432a.75.75 0 001.064-1.064L10.422 2.032zM8.25 5.25a.75.75 0 00-1.5 0v3a.75.75 0 001.5 0v-3zM10.879 2.44a.75.75 0 00-1.06 0l-7.5 7.5a.75.75 0 000 1.06l7.5 7.5a.75.75 0 001.06-1.06L4.31 11.5h11.44a.75.75 0 000-1.5H4.31l6.57-6.56a.75.75 0 000-1.06z"></path></svg>
+                    <div class="flex justify-center mb-4 text-gold-text">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <!-- Repeat 4 more times -->
+                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    </div>
+                    <p class="text-gray-400 italic">"A apresentação no nosso evento corporativo foi impecável. O quarteto de cordas trouxe uma sofisticação que elevou a experiência de todos. Recomendamos fortemente!"</p>
+                    <p class="mt-4 font-bold font-serif-display text-lg">- Beatriz Costa, Eventos Corp</p>
+                </div>
+                <!-- Depoimento 3 -->
+                <div class="reveal bg-[#111] p-8 rounded-lg border border-gray-700 relative hover:border-gold-text transition-colors duration-300" style="transition-delay: 400ms;">
+                    <svg class="absolute top-4 left-4 w-12 h-12 text-gray-700 opacity-50" fill="currentColor" viewBox="0 0 20 20"><path d="M10.422 2.032a.75.75 0 00-1.064 1.064l1.432 1.432a.75.75 0 001.064-1.064L10.422 2.032zM8.25 5.25a.75.75 0 00-1.5 0v3a.75.75 0 001.5 0v-3zM10.879 2.44a.75.75 0 00-1.06 0l-7.5 7.5a.75.75 0 000 1.06l7.5 7.5a.75.75 0 001.06-1.06L4.31 11.5h11.44a.75.75 0 000-1.5H4.31l6.57-6.56a.75.75 0 000-1.06z"></path></svg>
+                    <div class="flex justify-center mb-4 text-gold-text">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <!-- Repeat 4 more times -->
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    </div>
+                    <p class="text-gray-400 italic">"Desde o primeiro contato até o dia do evento, o atendimento foi fantástico. A música ao vivo no nosso jantar foi o toque final que tornou tudo perfeito. Mágico!"</p>
+                    <p class="mt-4 font-bold font-serif-display text-lg">- Ricardo Oliveira</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Seção de Contato / Orçamento -->
-    <section id="contato" class="py-20 bg-[#1a1a1a]">
+    <section id="contato" class="py-20 bg-[#111]">
         <div class="container mx-auto px-6">
             <div class="reveal text-center">
                 <h3 class="text-4xl font-serif-display font-bold">Solicite um Orçamento</h3>
                 <p class="mt-2 text-gray-400 max-w-2xl mx-auto">Preencha os campos abaixo para criarmos uma proposta personalizada para seu evento.</p>
             </div>
             
-            <div class="max-w-3xl mx-auto mt-12 bg-[#111] p-8 rounded-lg border border-gray-700 reveal">
+            <div class="max-w-3xl mx-auto mt-12 bg-[#1a1a1a] p-8 rounded-lg border border-gray-700 reveal">
                 <!-- Barra de Progresso -->
                 <div class="mb-8">
                      <div class="relative pt-1">
@@ -344,6 +461,32 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // --- LÓGICA DO PLAYER DE ÁUDIO ---
+            const audioPlayer = document.getElementById('audio-player');
+            const playPauseBtn = document.getElementById('play-pause-btn');
+            const playIcon = document.getElementById('play-icon');
+            const pauseIcon = document.getElementById('pause-icon');
+
+            playPauseBtn.addEventListener('click', () => {
+                const isPlaying = !audioPlayer.paused;
+                if (isPlaying) {
+                    audioPlayer.pause();
+                    playIcon.style.display = 'block';
+                    pauseIcon.style.display = 'none';
+                } else {
+                    audioPlayer.play();
+                    playIcon.style.display = 'none';
+                    pauseIcon.style.display = 'block';
+                }
+            });
+
+            // Resetar o botão quando a música terminar
+            audioPlayer.addEventListener('ended', () => {
+                playIcon.style.display = 'block';
+                pauseIcon.style.display = 'none';
+            });
+
+
             // --- Animações de Scroll ---
             const revealElements = document.querySelectorAll('.reveal');
             const observer = new IntersectionObserver((entries) => {
