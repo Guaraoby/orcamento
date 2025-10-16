@@ -67,6 +67,21 @@
             background-color: rgba(212, 175, 55, 0.1);
             color: #D4AF37;
         }
+        
+        /* Estilização para o carrossel do passo 2 */
+        .scroll-snap-x-mandatory {
+            scroll-snap-type: x mandatory;
+        }
+        .scroll-snap-align-center {
+            scroll-snap-align: center;
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
 
         /* --- ESTILOS DO PLAYER DE ÁUDIO --- */
         #audio-player-container {
@@ -242,7 +257,6 @@
                     <img src="./imagens/foto_depoimento_1.jpg" alt="Foto do casal Annelise e Victor" class="w-24 h-24 rounded-full object-cover mb-4 border-2 border-gold-text">
                     <div class="flex justify-center mb-4 text-gold-text">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                        <!-- Repeat 4 more times -->
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
@@ -256,7 +270,6 @@
                     <img src="./imagens/foto_depoimento_2.jpg" alt="Foto do casal Akemi e Lauro" class="w-24 h-24 rounded-full object-cover mb-4 border-2 border-gold-text">
                     <div class="flex justify-center mb-4 text-gold-text">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                        <!-- Repeat 4 more times -->
                          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
@@ -270,7 +283,6 @@
                     <img src="./imagens/foto_depoimento_3.jpg" alt="Foto do casal Isabela e Vitor" class="w-24 h-24 rounded-full object-cover mb-4 border-2 border-gold-text">
                     <div class="flex justify-center mb-4 text-gold-text">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                        <!-- Repeat 4 more times -->
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
@@ -294,7 +306,7 @@
             <div class="max-w-3xl mx-auto mt-12 bg-[#1a1a1a] p-8 rounded-lg border border-gray-700 reveal">
                 <!-- Barra de Progresso -->
                 <div class="mb-8">
-                     <div class="relative pt-1">
+                      <div class="relative pt-1">
                         <div class="flex mb-2 items-center justify-between">
                             <div>
                                 <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full gold-text bg-gold-text/20" id="step-name">
@@ -331,39 +343,62 @@
                         </div>
                     </div>
 
-                    <!-- Passo 2: Formação Instrumental -->
+                    <!-- Passo 2: Formação Instrumental (MODIFICADO) -->
                     <div id="step-2" class="step-content">
-                        <h4 class="text-2xl font-serif-display font-bold mb-6">Escolha a formação instrumental</h4>
-                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <input type="radio" name="instrumentalFormation" id="singela" value="Formação Singela: 1 Violino, 1 Violoncelo, 1 Piano Digital" class="hidden">
-                            <label for="singela" class="cursor-pointer text-center p-4 border-2 border-gray-600 rounded-lg hover:border-gold-text transition-all">
-                                <span class="font-semibold block text-lg">Formação Singela</span>
-                                <span class="text-sm text-gray-400 block mt-1">1 Violino, 1 Violoncelo, 1 Piano Digital</span>
-                            </label>
-                            
-                            <input type="radio" name="instrumentalFormation" id="quarteto_cordas" value="Quarteto de Cordas: 2 Violinos, 1 Viola, 1 Violoncelo" class="hidden">
-                            <label for="quarteto_cordas" class="cursor-pointer text-center p-4 border-2 border-gray-600 rounded-lg hover:border-gold-text transition-all">
-                                <span class="font-semibold block text-lg">Quarteto de Cordas</span>
-                                <span class="text-sm text-gray-400 block mt-1">2 Violinos, 1 Viola, 1 Violoncelo</span>
-                            </label>
-                            
-                            <input type="radio" name="instrumentalFormation" id="quarteto_versatil" value="Quarteto Versátil: 2 Violinos, 1 Violoncelo, 1 Piano Digital" class="hidden">
-                            <label for="quarteto_versatil" class="cursor-pointer text-center p-4 border-2 border-gray-600 rounded-lg hover:border-gold-text transition-all">
-                                <span class="font-semibold block text-lg">Quarteto Versátil</span>
-                                <span class="text-sm text-gray-400 block mt-1">2 Violinos, 1 Violoncelo, 1 Piano Digital</span>
-                            </label>
+                        <h4 class="text-2xl font-serif-display font-bold mb-6 text-center">Escolha a formação instrumental</h4>
+                        <p class="text-gray-400 mb-6 -mt-4 text-center">Arraste para o lado para ver as opções.</p>
+                        
+                        <!-- Container do Carrossel -->
+                        <div class="relative">
+                            <div class="flex overflow-x-auto space-x-4 pb-4 scroll-snap-x-mandatory scrollbar-hide -mx-8 px-8">
+                                <!-- Slide 1: Formação Singela -->
+                                <div class="scroll-snap-align-center flex-shrink-0 w-[85%] md:w-[48%]">
+                                    <input type="radio" name="instrumentalFormation" id="singela" value="Formação Singela: 1 Violino, 1 Violoncelo, 1 Piano Digital" class="hidden peer">
+                                    <label for="singela" class="cursor-pointer block p-4 border-2 border-gray-600 rounded-lg peer-checked:border-gold-text peer-checked:bg-gold-text/10 hover:border-gold-text transition-all h-full">
+                                        <img src="./imagens/formacao_1.jpg" alt="[Imagem da Formação Singela]" class="w-full h-48 object-cover rounded-md mb-4" onerror="this.onerror=null;this.src='https://placehold.co/600x400/1a1a1a/eaeaea?text=Formação+1';">
+                                        <span class="font-semibold block text-lg text-center">Formação Singela</span>
+                                        <span class="text-sm text-gray-400 block mt-1 text-center">1 Violino, 1 Violoncelo, 1 Piano Digital</span>
+                                    </label>
+                                </div>
+                                
+                                <!-- Slide 2: Quarteto de Cordas -->
+                                <div class="scroll-snap-align-center flex-shrink-0 w-[85%] md:w-[48%]">
+                                    <input type="radio" name="instrumentalFormation" id="quarteto_cordas" value="Quarteto de Cordas: 2 Violinos, 1 Viola, 1 Violoncelo" class="hidden peer">
+                                    <label for="quarteto_cordas" class="cursor-pointer block p-4 border-2 border-gray-600 rounded-lg peer-checked:border-gold-text peer-checked:bg-gold-text/10 hover:border-gold-text transition-all h-full">
+                                        <img src="./imagens/formacao_2.jpg" alt="[Imagem do Quarteto de Cordas]" class="w-full h-48 object-cover rounded-md mb-4" onerror="this.onerror=null;this.src='https://placehold.co/600x400/1a1a1a/eaeaea?text=Formação+2';">
+                                        <span class="font-semibold block text-lg text-center">Quarteto de Cordas</span>
+                                        <span class="text-sm text-gray-400 block mt-1 text-center">2 Violinos, 1 Viola, 1 Violoncelo</span>
+                                    </label>
+                                </div>
 
-                            <input type="radio" name="instrumentalFormation" id="orquestral" value="Formação Orquestral: 4 Violinos, 1 Viola, 1 Violoncelo, 1 Piano Digital" class="hidden">
-                            <label for="orquestral" class="cursor-pointer text-center p-4 border-2 border-gray-600 rounded-lg hover:border-gold-text transition-all">
-                                <span class="font-semibold block text-lg">Formação Orquestral</span>
-                                <span class="text-sm text-gray-400 block mt-1">4 Violinos, 1 Viola, 1 Violoncelo, 1 Piano Digital</span>
-                            </label>
+                                <!-- Slide 3: Quarteto Versátil -->
+                                <div class="scroll-snap-align-center flex-shrink-0 w-[85%] md:w-[48%]">
+                                    <input type="radio" name="instrumentalFormation" id="quarteto_versatil" value="Quarteto Versátil: 2 Violinos, 1 Violoncelo, 1 Piano Digital" class="hidden peer">
+                                    <label for="quarteto_versatil" class="cursor-pointer block p-4 border-2 border-gray-600 rounded-lg peer-checked:border-gold-text peer-checked:bg-gold-text/10 hover:border-gold-text transition-all h-full">
+                                        <img src="./imagens/formacao_3.jpg" alt="[Imagem do Quarteto Versátil]" class="w-full h-48 object-cover rounded-md mb-4" onerror="this.onerror=null;this.src='https://placehold.co/600x400/1a1a1a/eaeaea?text=Formação+3';">
+                                        <span class="font-semibold block text-lg text-center">Quarteto Versátil</span>
+                                        <span class="text-sm text-gray-400 block mt-1 text-center">2 Violinos, 1 Violoncelo, 1 Piano Digital</span>
+                                    </label>
+                                </div>
+                                
+                                <!-- Slide 4: Formação Orquestral -->
+                                <div class="scroll-snap-align-center flex-shrink-0 w-[85%] md:w-[48%]">
+                                    <input type="radio" name="instrumentalFormation" id="orquestral" value="Formação Orquestral: 4 Violinos, 1 Viola, 1 Violoncelo, 1 Piano Digital" class="hidden peer">
+                                    <label for="orquestral" class="cursor-pointer block p-4 border-2 border-gray-600 rounded-lg peer-checked:border-gold-text peer-checked:bg-gold-text/10 hover:border-gold-text transition-all h-full">
+                                        <img src="./imagens/formacao_4.jpg" alt="[Imagem da Formação Orquestral]" class="w-full h-48 object-cover rounded-md mb-4" onerror="this.onerror=null;this.src='https://placehold.co/600x400/1a1a1a/eaeaea?text=Formação+4';">
+                                        <span class="font-semibold block text-lg text-center">Formação Orquestral</span>
+                                        <span class="text-sm text-gray-400 block mt-1 text-center">4 Violinos, 1 Viola, 1 Violoncelo, 1 Piano Digital</span>
+                                    </label>
+                                </div>
+                            </div>
                         </div>
+                        
                         <div class="mt-8 flex justify-between">
                             <button type="button" class="prev-step border-2 gold-border gold-text font-bold py-2 px-6 rounded-full hover:bg-gold-text hover:text-black transition-all">Anterior</button>
                             <button type="button" class="next-step gold-bg text-black font-bold py-2 px-6 rounded-full hover:bg-opacity-90 transition-all">Próximo</button>
                         </div>
                     </div>
+
 
                      <!-- Passo 3: Opcionais -->
                     <div id="step-3" class="step-content">
