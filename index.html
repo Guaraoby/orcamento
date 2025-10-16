@@ -343,7 +343,7 @@
                         </div>
                     </div>
 
-                    <!-- Passo 2: Formação Instrumental (MODIFICADO) -->
+                    <!-- Passo 2: Formação Instrumental -->
                     <div id="step-2" class="step-content">
                         <h4 class="text-2xl font-serif-display font-bold mb-6 text-center">Escolha a formação instrumental</h4>
                         <p class="text-gray-400 mb-6 -mt-4 text-center">Arraste para o lado para ver as opções.</p>
@@ -400,20 +400,43 @@
                     </div>
 
 
-                     <!-- Passo 3: Opcionais -->
+                    <!-- Passo 3: Opcionais (MODIFICADO) -->
                     <div id="step-3" class="step-content">
-                        <h4 class="text-2xl font-serif-display font-bold mb-6">Deseja adicionar algum opcional?</h4>
-                        <p class="text-gray-400 mb-4 -mt-4 text-center">Escolha quantos quiser.</p>
-                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <input type="checkbox" name="optionals" id="clarins" value="Clarins Triunfais" class="hidden">
-                            <label for="clarins" class="cursor-pointer text-center p-4 border-2 border-gray-600 rounded-lg hover:border-gold-text transition-all">Clarins Triunfais</label>
-                            
-                            <input type="checkbox" name="optionals" id="cajon" value="Cajón (Percussão)" class="hidden">
-                            <label for="cajon" class="cursor-pointer text-center p-4 border-2 border-gray-600 rounded-lg hover:border-gold-text transition-all">Cajón (Percussão)</label>
-                            
-                            <input type="checkbox" name="optionals" id="cantores" value="Cantores (1-2 Vozes)" class="hidden">
-                            <label for="cantores" class="cursor-pointer text-center p-4 border-2 border-gray-600 rounded-lg hover:border-gold-text transition-all">Cantores (1-2 Vozes)</label>
+                        <h4 class="text-2xl font-serif-display font-bold mb-6 text-center">Deseja adicionar algum opcional?</h4>
+                        <p class="text-gray-400 mb-6 -mt-4 text-center">Arraste para o lado e escolha quantos quiser.</p>
+                        
+                        <!-- Container do Carrossel -->
+                        <div class="relative">
+                            <div class="flex overflow-x-auto space-x-4 pb-4 scroll-snap-x-mandatory scrollbar-hide -mx-8 px-8">
+                                <!-- Slide 1: Clarins Triunfais -->
+                                <div class="scroll-snap-align-center flex-shrink-0 w-[85%] md:w-[48%]">
+                                    <input type="checkbox" name="optionals" id="clarins" value="Clarins Triunfais" class="hidden peer">
+                                    <label for="clarins" class="cursor-pointer block p-4 border-2 border-gray-600 rounded-lg peer-checked:border-gold-text peer-checked:bg-gold-text/10 hover:border-gold-text transition-all h-full">
+                                        <img src="./imagens/foto_opcional_1.jpg" alt="[Imagem de Clarins Triunfais]" class="w-full h-48 object-cover rounded-md mb-4" onerror="this.onerror=null;this.src='https://placehold.co/600x400/1a1a1a/eaeaea?text=Opcional+1';">
+                                        <span class="font-semibold block text-lg text-center">Clarins Triunfais</span>
+                                    </label>
+                                </div>
+                                
+                                <!-- Slide 2: Cajón (Percussão) -->
+                                <div class="scroll-snap-align-center flex-shrink-0 w-[85%] md:w-[48%]">
+                                    <input type="checkbox" name="optionals" id="cajon" value="Cajón (Percussão)" class="hidden peer">
+                                    <label for="cajon" class="cursor-pointer block p-4 border-2 border-gray-600 rounded-lg peer-checked:border-gold-text peer-checked:bg-gold-text/10 hover:border-gold-text transition-all h-full">
+                                        <img src="./imagens/foto_opcional_2.jpg" alt="[Imagem de Cajón (Percussão)]" class="w-full h-48 object-cover rounded-md mb-4" onerror="this.onerror=null;this.src='https://placehold.co/600x400/1a1a1a/eaeaea?text=Opcional+2';">
+                                        <span class="font-semibold block text-lg text-center">Cajón (Percussão)</span>
+                                    </label>
+                                </div>
+
+                                <!-- Slide 3: Cantores (1-2 Vozes) -->
+                                <div class="scroll-snap-align-center flex-shrink-0 w-[85%] md:w-[48%]">
+                                    <input type="checkbox" name="optionals" id="cantores" value="Cantores (1-2 Vozes)" class="hidden peer">
+                                    <label for="cantores" class="cursor-pointer block p-4 border-2 border-gray-600 rounded-lg peer-checked:border-gold-text peer-checked:bg-gold-text/10 hover:border-gold-text transition-all h-full">
+                                        <img src="./imagens/foto_opcional_3.jpg" alt="[Imagem de Cantores]" class="w-full h-48 object-cover rounded-md mb-4" onerror="this.onerror=null;this.src='https://placehold.co/600x400/1a1a1a/eaeaea?text=Opcional+3';">
+                                        <span class="font-semibold block text-lg text-center">Cantores (1-2 Vozes)</span>
+                                    </label>
+                                </div>
+                            </div>
                         </div>
+                        
                         <div class="mt-8 flex justify-between">
                             <button type="button" class="prev-step border-2 gold-border gold-text font-bold py-2 px-6 rounded-full hover:bg-gold-text hover:text-black transition-all">Anterior</button>
                             <button type="button" class="next-step gold-bg text-black font-bold py-2 px-6 rounded-full hover:bg-opacity-90 transition-all">Próximo</button>
@@ -614,3 +637,4 @@
 
 </body>
 </html>
+
