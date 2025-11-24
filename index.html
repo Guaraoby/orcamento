@@ -3,550 +3,563 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guaraoby | Música para Eventos</title>
+    <title>Guaraoby | A Trilha Sonora da Sua História</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            400: '#D4AF37',
+                            500: '#C5A028',
+                            600: '#B08D1E',
+                        },
+                        rose: {
+                            800: '#9f1239', // Vinho rosado
+                            900: '#881337', // Fundo escuro rosado
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
     <style>
-        /* Estilos personalizados e animações */
+        /* Estilos Base */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #111111;
+            background-color: #0a0a0a;
             color: #EAEAEA;
+            overflow-x: hidden;
         }
         .font-serif-display {
             font-family: 'Cormorant Garamond', serif;
         }
+        
+        /* Background Hero */
         .hero-bg {
-            background-image: linear-gradient(rgba(17, 17, 17, 0.85), rgba(17, 17, 17, 0.85)), url('./imagens/foto_casamento_fundo.jpg');
+            background-image: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(10,10,10,1)), url('./imagens/foto_casamento_fundo.jpg');
             background-size: cover;
             background-position: center;
-        }
-        .gold-text {
-            color: #D4AF37;
-        }
-        .gold-border {
-            border-color: #D4AF37;
-        }
-        .gold-bg {
-            background-color: #D4AF37;
+            background-attachment: fixed;
         }
 
-        /* Animações de entrada com Intersection Observer */
+        /* Utilitários Dourados e Rosê */
+        .text-gold { color: #D4AF37; }
+        .border-gold { border-color: #D4AF37; }
+        .bg-gold { background-color: #D4AF37; color: #000; }
+        
+        /* Animações */
         .reveal {
             opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
         }
         .reveal.visible {
             opacity: 1;
             transform: translateY(0);
         }
         
-        /* Estilo para o formulário de múltiplos passos */
+        /* Player de Áudio Moderno */
+        .audio-wave-bar {
+            width: 3px;
+            background: #D4AF37;
+            animation: wave 1s ease-in-out infinite;
+        }
+        @keyframes wave {
+            0%, 100% { height: 10px; }
+            50% { height: 20px; }
+        }
+        .paused .audio-wave-bar { animation-play-state: paused; height: 5px; }
+
+        /* Formulário Multi-passos */
         .step-content {
             display: none;
-            animation: fadeIn 0.5s ease-in-out;
+            animation: fadeIn 0.4s ease-out;
         }
-        .step-content.active {
+        .step-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Carrossel Customizado */
+        .snap-x-mandatory { scroll-snap-type: x mandatory; }
+        .snap-center { scroll-snap-align: center; }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Fluxograma Rosado (Efeito Glassmorphism) */
+        .fluxo-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .fluxo-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(212, 175, 55, 0.5);
+        }
+        .seta-fluxo {
+            position: relative;
+        }
+        .seta-fluxo::after {
+            content: '→';
+            font-size: 2rem;
+            color: rgba(255,255,255,0.3);
             display: block;
+            margin: 10px 0;
         }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .progress-bar-fill {
-            transition: width 0.4s ease-in-out;
-        }
-
-        /* Estilização customizada para inputs de rádio e checkbox */
-        input[type="radio"]:checked + label,
-        input[type="checkbox"]:checked + label {
-            border-color: #D4AF37;
-            background-color: rgba(212, 175, 55, 0.1);
-            color: #D4AF37;
-        }
-        
-        /* Estilização para o carrossel do passo 2 */
-        .scroll-snap-x-mandatory {
-            scroll-snap-type: x mandatory;
-        }
-        .scroll-snap-align-center {
-            scroll-snap-align: center;
-        }
-        .scrollbar-hide::-webkit-scrollbar {
-            display: none;
-        }
-        .scrollbar-hide {
-            -ms-overflow-style: none;  /* IE and Edge */
-            scrollbar-width: none;  /* Firefox */
-        }
-
-        /* --- ESTILOS DO PLAYER DE ÁUDIO --- */
-        #audio-player-container {
-            margin-top: 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-        }
-        #play-pause-btn {
-            background-color: transparent;
-            border: 2px solid #D4AF37;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        #play-pause-btn:hover {
-            background-color: rgba(212, 175, 55, 0.1);
-            transform: scale(1.1);
-        }
-        #play-pause-btn svg {
-            width: 24px;
-            height: 24px;
-            fill: #D4AF37;
-        }
-        #pause-icon {
-            display: none;
-        }
-        #song-info {
-            text-align: left;
-            color: #EAEAEA;
-        }
-        #song-title {
-            font-weight: bold;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.25rem;
-        }
-        #song-artist {
-            font-size: 0.9rem;
-            color: #9ca3af;
+        @media (min-width: 768px) {
+            .seta-fluxo::after {
+                position: absolute;
+                right: -25px;
+                top: 50%;
+                transform: translateY(-50%);
+                margin: 0;
+            }
         }
     </style>
 </head>
-<body class="antialiased">
+<body class="antialiased selection:bg-gold-400 selection:text-black">
 
-    <!-- Cabeçalho -->
-    <header class="fixed top-0 left-0 right-0 z-50 bg-black/50 backdrop-blur-sm transition-all duration-300" id="header">
+    <!-- Cabeçalho Flutuante -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-md border-b border-white/5 transition-all duration-300" id="header">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <h1 class="text-3xl font-serif-display font-bold text-white">Guaraoby</h1>
-            <nav class="hidden md:flex space-x-8">
-                <a href="#servicos" class="text-white hover:text-gold-text transition-colors">Serviços</a>
-                <a href="#portfolio" class="text-white hover:text-gold-text transition-colors">Portfólio</a>
-                <a href="#depoimentos" class="text-white hover:text-gold-text transition-colors">Depoimentos</a>
-                <a href="#contato" class="gold-bg text-black font-bold py-2 px-4 rounded-full hover:bg-opacity-90 transition-all">Orçamento</a>
+            <div class="flex items-center gap-2">
+                <h1 class="text-2xl md:text-3xl font-serif-display font-bold text-white tracking-wide">Guaraoby<span class="text-gold-400">.</span></h1>
+            </div>
+            
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium tracking-widest uppercase">
+                <a href="#metodo" class="text-gray-300 hover:text-gold-400 transition-colors">O Método</a>
+                <a href="#formacoes" class="text-gray-300 hover:text-gold-400 transition-colors">Coleções</a>
+                <a href="#depoimentos" class="text-gray-300 hover:text-gold-400 transition-colors">Histórias</a>
+                <a href="#contato" class="bg-gradient-to-r from-gold-400 to-gold-600 text-black px-6 py-2 rounded-full font-bold hover:shadow-[0_0_15px_rgba(212,175,55,0.4)] transition-all transform hover:scale-105">
+                    Verificar Data
+                </a>
             </nav>
-            <button class="md-hidden text-white" id="mobile-menu-button">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-white" id="mobile-menu-button">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
             </button>
         </div>
-        <!-- Menu Mobile -->
-        <div id="mobile-menu" class="hidden md:hidden bg-black/80">
-            <a href="#servicos" class="block text-center text-white py-3">Serviços</a>
-            <a href="#portfolio" class="block text-center text-white py-3">Portfólio</a>
-            <a href="#depoimentos" class="block text-center text-white py-3">Depoimentos</a>
-            <a href="#contato" class="block text-center text-white py-3 gold-bg font-bold">Orçamento</a>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-black/95 border-t border-white/10 absolute w-full">
+            <a href="#metodo" class="block text-center text-white py-4 border-b border-white/5">O Método</a>
+            <a href="#formacoes" class="block text-center text-white py-4 border-b border-white/5">Coleções</a>
+            <a href="#contato" class="block text-center text-gold-400 font-bold py-4">Solicitar Orçamento</a>
         </div>
     </header>
 
-    <!-- Seção Hero -->
-    <section class="hero-bg min-h-screen flex items-center justify-center text-center">
-        <div class="container mx-auto px-6 reveal visible">
-             <!-- Logo do Guaraoby -->
-            <img src="./imagens/foto_guaraoby.jpg" alt="Logo Guaraoby" class="mx-auto h-60 md:h-80 w-auto mb-4">
-            <h2 class="text-3xl md:text-5xl font-serif-display text-gray-300">Entre notas e votos</h2>
-            <p class="text-xl md:text-2xl mt-8 max-w-3xl mx-auto text-white">Música que transforma momentos.</p>
-            <p class="text-lg md:text-xl mt-4 max-w-3xl mx-auto text-gray-400">Atuamos em eventos desde 2010, com ensaios semanais para garantir uma qualidade impecável para o seu momento especial.</p>
+    <!-- Hero Section -->
+    <section class="hero-bg min-h-screen flex items-center justify-center relative">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-[#0a0a0a]"></div>
         
-            <!-- Player de Áudio -->
-            <div id="audio-player-container">
-                <audio id="audio-player" src="./audio/musica_exemplo.mp3"></audio>
-                <button id="play-pause-btn">
-                    <svg id="play-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
-                    <svg id="pause-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8 7a1 1 0 00-1 1v4a1 1 0 001 1h4a1 1 0 001-1V8a1 1 0 00-1-1H8z" clip-rule="evenodd"></path></svg>
-                </button>
-                <div id="song-info">
-                    <p id="song-title">Hallelujah</p>
-                    <p id="song-artist">Arranjo por Guaraoby</p>
+        <div class="container mx-auto px-6 relative z-10 text-center pt-20">
+            <div class="reveal visible flex flex-col items-center">
+                <span class="text-gold-400 tracking-[0.3em] uppercase text-sm mb-4">Desde 2010</span>
+                <img src="./imagens/foto_guaraoby.jpg" alt="Logo Guaraoby" class="h-48 md:h-64 w-auto mb-8 drop-shadow-2xl rounded-full border-2 border-white/10">
+                
+                <h2 class="text-4xl md:text-6xl lg:text-7xl font-serif-display text-white leading-tight">
+                    Não é apenas música.<br>
+                    <span class="italic text-gold-400">É a alma do seu evento.</span>
+                </h2>
+                
+                <p class="text-lg md:text-xl mt-6 max-w-2xl mx-auto text-gray-300 font-light">
+                    Transformamos sua cerimônia em um filme e sua recepção em uma festa inesquecível.
+                </p>
+
+                <!-- Player Minimalista -->
+                <div class="mt-10 bg-white/5 backdrop-blur-md border border-white/10 rounded-full p-2 pr-6 flex items-center gap-4 hover:border-gold-400/50 transition-colors cursor-pointer group" id="audio-controller">
+                    <button id="play-pause-btn" class="w-12 h-12 bg-gold-400 rounded-full flex items-center justify-center text-black group-hover:scale-110 transition-transform">
+                        <svg id="play-icon" class="w-5 h-5 ml-1" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4l12 6-12 6z"/></svg>
+                        <svg id="pause-icon" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 20 20"><path d="M6 4h3v12H6zm5 0h3v12h-3z"/></svg>
+                    </button>
+                    <div class="text-left">
+                        <p class="text-xs text-gold-400 uppercase tracking-wider">Now Playing</p>
+                        <p class="text-sm font-serif-display text-white">Hallelujah - Guaraoby Strings</p>
+                    </div>
+                    <div class="flex items-end gap-1 h-5 ml-2" id="visualizer">
+                        <div class="audio-wave-bar h-3"></div>
+                        <div class="audio-wave-bar h-5" style="animation-delay: 0.1s"></div>
+                        <div class="audio-wave-bar h-2" style="animation-delay: 0.2s"></div>
+                        <div class="audio-wave-bar h-4" style="animation-delay: 0.3s"></div>
+                    </div>
+                    <audio id="audio-player" src="./audio/musica_exemplo.mp3"></audio>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce text-white/30">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+        </div>
+    </section>
+
+    <!-- SEÇÃO O MÉTODO (Fluxograma Rosado) -->
+    <section id="metodo" class="py-24 relative overflow-hidden">
+        <!-- Fundo Rosado Gradiente -->
+        <div class="absolute inset-0 bg-gradient-to-br from-rose-900/40 via-[#1a050a] to-[#0a0a0a]"></div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-16 reveal">
+                <span class="text-rose-400 tracking-widest uppercase text-xs font-bold">Nosso Diferencial</span>
+                <h3 class="text-4xl md:text-5xl font-serif-display text-white mt-2">O Caminho até o "Sim"</h3>
+                <p class="text-gray-400 mt-4 max-w-2xl mx-auto">Não vendemos apenas músicos. Entregamos uma consultoria completa para garantir que cada segundo tenha a trilha perfeita.</p>
+            </div>
+
+            <div class="grid md:grid-cols-4 gap-6 max-w-6xl mx-auto">
+                <!-- Passo 1 -->
+                <div class="fluxo-card p-8 rounded-xl relative reveal seta-fluxo">
+                    <div class="text-4xl mb-4">✨</div>
+                    <h4 class="text-xl font-bold text-gold-400 mb-2">1. O Sonho</h4>
+                    <p class="text-sm text-gray-300">Entendemos sua visão. É clássico? Moderno? Na igreja ou no campo? Ouvimos o que você deseja sentir.</p>
+                </div>
+
+                <!-- Passo 2 -->
+                <div class="fluxo-card p-8 rounded-xl relative reveal seta-fluxo" style="transition-delay: 100ms">
+                    <div class="text-4xl mb-4">📋</div>
+                    <h4 class="text-xl font-bold text-gold-400 mb-2">2. A Estratégia</h4>
+                    <p class="text-sm text-gray-300">Briefing detalhado. Ajudamos a escolher a formação ideal (Instrumental ou Banda) que se encaixa na acústica e no orçamento.</p>
+                </div>
+
+                <!-- Passo 3 -->
+                <div class="fluxo-card p-8 rounded-xl relative reveal seta-fluxo" style="transition-delay: 200ms">
+                    <div class="text-4xl mb-4">🎁</div>
+                    <h4 class="text-xl font-bold text-gold-400 mb-2">3. O Presente</h4>
+                    <p class="text-sm text-gray-300">Ao fechar a Cerimônia, apresentamos condições exclusivas para enriquecer a experiência dos seus convidados.</p>
+                </div>
+
+                <!-- Passo 4 -->
+                <div class="fluxo-card p-8 rounded-xl relative reveal" style="transition-delay: 300ms">
+                    <div class="text-4xl mb-4">💍</div>
+                    <h4 class="text-xl font-bold text-gold-400 mb-2">4. O Grande Dia</h4>
+                    <p class="text-sm text-gray-300">Execução impecável. Nossa equipe chega horas antes, alinha com o cerimonial e entrega emoção pura.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Seção de Serviços -->
-    <section id="servicos" class="py-20 bg-[#1a1a1a]">
-        <div class="container mx-auto px-6 text-center">
-            <div class="reveal">
-                <h3 class="text-4xl font-serif-display font-bold">Nossos Serviços</h3>
-                <p class="mt-2 text-gray-400 max-w-2xl mx-auto">Música ao vivo com a sensibilidade e a sofisticação que seu evento merece.</p>
+    <!-- Seção Formações e Pacotes -->
+    <section id="formacoes" class="py-24 bg-[#0a0a0a]">
+        <div class="container mx-auto px-6">
+            <div class="reveal text-center mb-16">
+                <h3 class="text-4xl font-serif-display font-bold text-white">Nossas Coleções</h3>
+                <p class="text-gray-400 mt-2">Do intimista ao grandioso. Mantenha a essência clássica ou traga a modernidade.</p>
             </div>
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
-                <!-- Card Serviço 1 -->
-                <div class="reveal p-8 border border-gray-700 rounded-lg bg-[#111] hover:border-gold-text hover:-translate-y-2 transition-all duration-300">
-                     <svg class="w-12 h-12 mx-auto gold-text" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
-                    <h4 class="text-2xl font-serif-display font-bold mt-4">Casamentos</h4>
-                    <p class="mt-2 text-gray-400">Da cerimônia à recepção, criamos uma atmosfera emocionante e inesquecível para o seu grande dia.</p>
+
+            <!-- Tabs Conceituais -->
+            <div class="flex justify-center gap-8 mb-12 text-sm uppercase tracking-widest reveal">
+                <button class="text-gold-400 border-b-2 border-gold-400 pb-2">Cerimônia de Amor ou Religiosa</button>
+            </div>
+
+            <!-- Grid de Formações -->
+            <div class="relative reveal">
+                <div class="flex overflow-x-auto md:grid md:grid-cols-2 lg:grid-cols-4 gap-6 pb-8 snap-x-mandatory scrollbar-hide">
+                    
+                    <!-- Formação 1 -->
+                    <div class="snap-center flex-shrink-0 w-[85%] md:w-auto group relative rounded-2xl overflow-hidden aspect-[3/4]">
+                        <img src="./imagens/formacao_1.jpg" alt="Formação Singela" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-60 group-hover:opacity-40" onerror="this.onerror=null;this.src='https://placehold.co/600x800/1a1a1a/eaeaea?text=Singela';">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent p-6 flex flex-col justify-end">
+                            <h4 class="text-2xl font-serif-display text-white">Formação Singela</h4>
+                            <p class="text-gray-300 text-sm mt-2 mb-4">1 Violino, 1 Violoncelo, 1 Piano Digital.</p>
+                            <div class="border-t border-white/20 pt-4">
+                                <p class="text-gold-400 text-xs uppercase">Ideal para:</p>
+                                <p class="text-white text-sm">Mini Weddings e Capelas</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Formação 2 -->
+                    <div class="snap-center flex-shrink-0 w-[85%] md:w-auto group relative rounded-2xl overflow-hidden aspect-[3/4]">
+                        <img src="./imagens/formacao_2.jpg" alt="Quarteto de Cordas" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-60 group-hover:opacity-40" onerror="this.onerror=null;this.src='https://placehold.co/600x800/1a1a1a/eaeaea?text=Cordas';">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent p-6 flex flex-col justify-end">
+                            <h4 class="text-2xl font-serif-display text-white">Quarteto de Cordas</h4>
+                            <p class="text-gray-300 text-sm mt-2 mb-4">2 Violinos, 1 Viola, 1 Violoncelo.</p>
+                            <div class="border-t border-white/20 pt-4">
+                                <p class="text-gold-400 text-xs uppercase">Ideal para:</p>
+                                <p class="text-white text-sm">Igrejas Clássicas e Elegância Pura</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Formação 3 -->
+                    <div class="snap-center flex-shrink-0 w-[85%] md:w-auto group relative rounded-2xl overflow-hidden aspect-[3/4]">
+                        <img src="./imagens/formacao_3.jpg" alt="Quarteto Versátil" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-60 group-hover:opacity-40" onerror="this.onerror=null;this.src='https://placehold.co/600x800/1a1a1a/eaeaea?text=Versatil';">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent p-6 flex flex-col justify-end">
+                            <div class="absolute top-4 right-4 bg-gold-500 text-black text-xs font-bold px-3 py-1 rounded-full">MAIS PEDIDO</div>
+                            <h4 class="text-2xl font-serif-display text-white">Quarteto Versátil</h4>
+                            <p class="text-gray-300 text-sm mt-2 mb-4">2 Violinos, 1 Violoncelo, 1 Piano.</p>
+                            <div class="border-t border-white/20 pt-4">
+                                <p class="text-gold-400 text-xs uppercase">Ideal para:</p>
+                                <p class="text-white text-sm">Repertório Pop e Moderno</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Formação 4 -->
+                    <div class="snap-center flex-shrink-0 w-[85%] md:w-auto group relative rounded-2xl overflow-hidden aspect-[3/4]">
+                        <img src="./imagens/formacao_4.jpg" alt="Orquestra Premium" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-60 group-hover:opacity-40" onerror="this.onerror=null;this.src='https://placehold.co/600x800/1a1a1a/eaeaea?text=Orquestral';">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent p-6 flex flex-col justify-end">
+                            <h4 class="text-2xl font-serif-display text-white">Orquestra Premium</h4>
+                            <p class="text-gray-300 text-sm mt-2 mb-4">4 Violinos, Viola, Cello, Piano.</p>
+                            <div class="border-t border-white/20 pt-4">
+                                <p class="text-gold-400 text-xs uppercase">Ideal para:</p>
+                                <p class="text-white text-sm">Catedrais e Impacto Sonoro</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <!-- Card Serviço 2 -->
-                <div class="reveal p-8 border border-gray-700 rounded-lg bg-[#111] hover:border-gold-text hover:-translate-y-2 transition-all duration-300" style="transition-delay: 200ms;">
-                    <svg class="w-12 h-12 mx-auto gold-text" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
-                    <h4 class="text-2xl font-serif-display font-bold mt-4">Eventos Corporativos</h4>
-                    <p class="mt-2 text-gray-400">Adicione um toque de classe ao seu evento, com um repertório que se adapta à sua marca.</p>
-                </div>
-                <!-- Card Serviço 3 -->
-                <div class="reveal p-8 border border-gray-700 rounded-lg bg-[#111] hover:border-gold-text hover:-translate-y-2 transition-all duration-300" style="transition-delay: 400ms;">
-                    <svg class="w-12 h-12 mx-auto gold-text" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    <h4 class="text-2xl font-serif-display font-bold mt-4">Recepções e Jantares</h4>
-                    <p class="mt-2 text-gray-400">Nossa música cria o ambiente perfeito para socialização e celebração em coquetéis e jantares.</p>
-                </div>
-                 <!-- Card Serviço 4 -->
-                 <div class="reveal p-8 border border-gray-700 rounded-lg bg-[#111] hover:border-gold-text hover:-translate-y-2 transition-all duration-300" style="transition-delay: 600ms;">
-                    <svg class="w-12 h-12 mx-auto gold-text" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                    <h4 class="text-2xl font-serif-display font-bold mt-4">Eventos Fora de Dourados</h4>
-                    <p class="mt-2 text-gray-400">Levamos nossa música para todo o Estado MS e Paraguai! Enviamos nossa proposta com os detalhes de logística completo!</p>
+            </div>
+
+            <!-- A ESTRATÉGIA DO GANHO / BÔNUS -->
+            <div class="mt-20 bg-white/5 border border-gold-500/30 rounded-2xl p-8 md:p-12 relative overflow-hidden reveal">
+                <div class="absolute top-0 right-0 -mt-10 -mr-10 w-40 h-40 bg-gold-500/20 rounded-full blur-3xl"></div>
+                
+                <div class="grid md:grid-cols-2 gap-12 items-center relative z-10">
+                    <div>
+                        <span class="text-gold-400 uppercase tracking-widest text-sm font-bold">Seu Presente Especial</span>
+                        <h3 class="text-3xl md:text-4xl font-serif-display text-white mt-2 mb-4">Receptivo Pré-Cerimônia</h3>
+                        <p class="text-gray-300 mb-6">
+                            Entendemos que o evento começa antes mesmo da noiva entrar. Por isso, ao fechar a cerimônia, oferecemos o <strong>Receptivo (15min)</strong> para acolher seus convidados com elegância enquanto aguardam.
+                        </p>
+                        <p class="text-gray-400 mb-4 text-sm font-bold uppercase tracking-wider">E para a Festa?</p>
+                        <ul class="space-y-3 text-gray-400 mb-8">
+                            <li class="flex items-center gap-3">
+                                <span class="text-gold-400">✓</span> Violão e Voz (Para Jantares Intimistas)
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <span class="text-gold-400">✓</span> Mini Banda Acústica (Para Animar)
+                            </li>
+                        </ul>
+                        <div class="bg-gradient-to-r from-gold-600/20 to-transparent border-l-4 border-gold-500 p-4">
+                            <p class="text-white text-sm italic">"Garantimos a atmosfera perfeita desde a chegada do primeiro convidado."</p>
+                        </div>
+                    </div>
+                    <div class="relative h-64 md:h-full rounded-xl overflow-hidden">
+                        <img src="./imagens/foto_casamento_7.jpg" alt="Receptivo Pré-Cerimônia" class="absolute inset-0 w-full h-full object-cover" onerror="this.onerror=null;this.src='https://placehold.co/800x600/2a2a2a/eaeaea?text=Receptivo+Pre-Cerimonia';">
+                        <div class="absolute bottom-4 right-4 bg-black/80 backdrop-blur text-white px-4 py-2 rounded-lg text-sm font-bold">
+                            Bônus Incluso
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Seção Portfólio -->
-    <section id="portfolio" class="py-20">
+    <!-- Seção Portfólio Rápido -->
+    <section id="portfolio" class="py-20 bg-[#0f0f0f]">
+        <div class="container mx-auto px-6">
+            <div class="reveal text-center mb-12">
+                <h3 class="text-4xl font-serif-display font-bold text-white">Momentos Reais</h3>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-6xl mx-auto">
+                <img class="h-48 md:h-64 w-full object-cover rounded-lg hover:opacity-80 transition-opacity cursor-pointer" src="./imagens/formacao_1.jpg" alt="Momento 1">
+                <img class="h-48 md:h-64 w-full object-cover rounded-lg hover:opacity-80 transition-opacity cursor-pointer" src="./imagens/formacao_2.jpg" alt="Momento 2">
+                <img class="h-48 md:h-64 w-full object-cover rounded-lg hover:opacity-80 transition-opacity cursor-pointer" src="./imagens/foto_casamento_7.jpg" alt="Momento 3">
+                <img class="h-48 md:h-64 w-full object-cover rounded-lg hover:opacity-80 transition-opacity cursor-pointer" src="./imagens/foto_casamento_1.jpg" alt="Momento 4">
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Contato / Orçamento (Funil de Vendas) -->
+    <section id="contato" class="py-24 bg-[#050505]">
         <div class="container mx-auto px-6">
             <div class="reveal text-center">
-                <h3 class="text-4xl font-serif-display font-bold">Nosso Trabalho em Ação</h3>
-                <p class="mt-2 text-gray-400 max-w-2xl mx-auto">Imagens que capturam a emoção que nossa música proporciona.</p>
-            </div>
-            <!-- Galeria com tamanho reduzido -->
-            <div class="max-w-4xl mx-auto">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mt-12">
-                    <!-- Coluna 1 -->
-                    <div class="flex flex-col gap-4 md:gap-6 reveal">
-                        <img class="h-auto w-full object-cover rounded-lg hover:scale-105 transition-transform duration-300" src="./imagens/foto_casamento_1.jpg" alt="[Imagem de casamento 1]">
-                        <img class="h-auto w-full object-cover rounded-lg hover:scale-105 transition-transform duration-300" src="./imagens/foto_casamento_2.jpg" alt="[Imagem de casamento 2]">
-                        <img class="h-auto w-full object-cover rounded-lg hover:scale-105 transition-transform duration-300" src="./imagens/foto_casamento_3.jpg" alt="[Imagem de casamento 3]">
-                        <img class="h-auto w-full object-cover rounded-lg hover:scale-105 transition-transform duration-300" src="./imagens/foto_casamento_4.jpg" alt="[Imagem de casamento 4]">
-                    </div>
-                    <!-- Coluna 2 -->
-                    <div class="flex flex-col gap-4 md:gap-6 reveal" style="transition-delay: 200ms;">
-                        <img class="h-auto w-full object-cover rounded-lg hover:scale-105 transition-transform duration-300" src="./imagens/foto_casamento_5.jpg" alt="[Imagem de casamento 5]">
-                        <img class="h-auto w-full object-cover rounded-lg hover:scale-105 transition-transform duration-300" src="./imagens/foto_casamento_6.jpg" alt="[Imagem de casamento 6]">
-                        <img class="h-auto w-full object-cover rounded-lg hover:scale-105 transition-transform duration-300" src="./imagens/foto_casamento_7.jpg" alt="[Imagem de casamento 7]">
-                        <img class="h-auto w-full object-cover rounded-lg hover:scale-105 transition-transform duration-300" src="./imagens/foto_casamento_8.jpg" alt="[Imagem de casamento 8]">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Seção de Depoimentos -->
-    <section id="depoimentos" class="py-20 bg-[#1a1a1a]">
-        <div class="container mx-auto px-6 text-center">
-            <div class="reveal">
-                <h3 class="text-4xl font-serif-display font-bold">O Que Nossos Clientes Dizem</h3>
-                <p class="mt-2 text-gray-400 max-w-2xl mx-auto">A trilha sonora perfeita para momentos inesquecíveis.</p>
-            </div>
-            <div class="grid md:grid-cols-1 lg:grid-cols-3 gap-8 mt-12 max-w-5xl mx-auto">
-                <!-- Depoimento 1 -->
-                <div class="reveal bg-[#111] p-8 rounded-lg border border-gray-700 relative hover:border-gold-text transition-colors duration-300 flex flex-col items-center">
-                    <img src="./imagens/foto_depoimento_1.jpg" alt="Foto do casal Annelise e Victor" class="w-24 h-24 rounded-full object-cover mb-4 border-2 border-gold-text">
-                    <div class="flex justify-center mb-4 text-gold-text">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                    </div>
-                    <p class="text-gray-400 italic">"Contratar o Guaraoby foi a melhor decisão para o nosso casamento. A música foi emocionante e todos os convidados elogiaram. Profissionalismo e talento incríveis!"</p>
-                    <p class="mt-4 font-bold font-serif-display text-lg">- Annelise & Victor</p>
-                </div>
-                <!-- Depoimento 2 -->
-                <div class="reveal bg-[#111] p-8 rounded-lg border border-gray-700 relative hover:border-gold-text transition-colors duration-300 flex flex-col items-center" style="transition-delay: 200ms;">
-                    <img src="./imagens/foto_depoimento_2.jpg" alt="Foto do casal Akemi e Lauro" class="w-24 h-24 rounded-full object-cover mb-4 border-2 border-gold-text">
-                    <div class="flex justify-center mb-4 text-gold-text">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                    </div>
-                    <p class="text-gray-400 italic">"A apresentação no nosso evento corporativo foi impecável. O quarteto de cordas trouxe uma sofisticação que elevou a experiência de todos. Recomendamos fortemente!"</p>
-                    <p class="mt-4 font-bold font-serif-display text-lg">- Akemi & Lauro</p>
-                </div>
-                <!-- Depoimento 3 -->
-                <div class="reveal bg-[#111] p-8 rounded-lg border border-gray-700 relative hover:border-gold-text transition-colors duration-300 flex flex-col items-center" style="transition-delay: 400ms;">
-                    <img src="./imagens/foto_depoimento_3.jpg" alt="Foto do casal Isabela e Vitor" class="w-24 h-24 rounded-full object-cover mb-4 border-2 border-gold-text">
-                    <div class="flex justify-center mb-4 text-gold-text">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                    </div>
-                    <p class="text-gray-400 italic">"Desde o primeiro contato até o dia do evento, o atendimento foi fantástico. A música ao vivo no nosso jantar foi o toque final que tornou tudo perfeito. Mágico!"</p>
-                    <p class="mt-4 font-bold font-serif-display text-lg">- Isabela & Vitor</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Seção de Contato / Orçamento -->
-    <section id="contato" class="py-20 bg-[#111]">
-        <div class="container mx-auto px-6">
-            <div class="reveal text-center">
-                <h3 class="text-4xl font-serif-display font-bold">Solicite um Orçamento</h3>
-                <p class="mt-2 text-gray-400 max-w-2xl mx-auto">Preencha os campos abaixo para criarmos uma proposta personalizada para seu evento.</p>
+                <h3 class="text-4xl font-serif-display font-bold text-white">Vamos Construir Seu Dia?</h3>
+                <p class="mt-2 text-gray-400 max-w-2xl mx-auto">Preencha o briefing abaixo para receber uma proposta personalizada.</p>
             </div>
             
-            <div class="max-w-3xl mx-auto mt-12 bg-[#1a1a1a] p-8 rounded-lg border border-gray-700 reveal">
+            <div class="max-w-3xl mx-auto mt-12 bg-[#111] p-8 md:p-12 rounded-2xl border border-white/5 shadow-2xl reveal">
                 <!-- Barra de Progresso -->
                 <div class="mb-8">
-                      <div class="relative pt-1">
-                        <div class="flex mb-2 items-center justify-between">
-                            <div>
-                                <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full gold-text bg-gold-text/20" id="step-name">
-                                    Passo 1 / 8
-                                </span>
-                            </div>
-                        </div>
-                        <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-gray-700">
-                            <div style="width:12.5%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center gold-bg progress-bar-fill" id="progress-bar"></div>
-                        </div>
+                    <div class="flex justify-between text-xs uppercase tracking-widest text-gray-500 mb-2">
+                        <span id="step-label">Briefing Inicial</span>
+                        <span id="step-counter">1/5</span>
+                    </div>
+                    <div class="h-1 bg-gray-800 rounded-full overflow-hidden">
+                        <div class="h-full bg-gradient-to-r from-gold-400 to-rose-500 transition-all duration-500" id="progress-bar" style="width: 20%"></div>
                     </div>
                 </div>
 
-                <!-- Formulário -->
-                <form id="quote-form">
-                    <!-- Passo 1: Tipo de Evento -->
+                <form id="quote-form" class="relative min-h-[300px]">
+                    
+                    <!-- PASSO 1: O Grande Dia -->
                     <div id="step-1" class="step-content active">
-                        <h4 class="text-2xl font-serif-display font-bold mb-6">Qual o tipo do seu evento?</h4>
-                        <div class="grid grid-cols-2 gap-4">
-                            <input type="radio" name="eventType" id="casamento" value="Casamento" class="hidden">
-                            <label for="casamento" class="cursor-pointer text-center p-4 border-2 border-gray-600 rounded-lg hover:border-gold-text transition-all">Casamento</label>
-                            
-                            <input type="radio" name="eventType" id="corporativo" value="Corporativo" class="hidden">
-                            <label for="corporativo" class="cursor-pointer text-center p-4 border-2 border-gray-600 rounded-lg hover:border-gold-text transition-all">Corporativo</label>
-                            
-                            <input type="radio" name="eventType" id="recepcao" value="Recepção/Jantar" class="hidden">
-                            <label for="recepcao" class="cursor-pointer text-center p-4 border-2 border-gray-600 rounded-lg hover:border-gold-text transition-all">Recepção/Jantar</label>
-                            
-                            <input type="radio" name="eventType" id="outro" value="Outro" class="hidden">
-                            <label for="outro" class="cursor-pointer text-center p-4 border-2 border-gray-600 rounded-lg hover:border-gold-text transition-all">Outro</label>
-                        </div>
-                        <div class="mt-8 text-right">
-                            <button type="button" class="next-step gold-bg text-black font-bold py-2 px-6 rounded-full hover:bg-opacity-90 transition-all">Próximo</button>
-                        </div>
-                    </div>
-
-                    <!-- Passo 2: Formação Instrumental -->
-                    <div id="step-2" class="step-content">
-                        <h4 class="text-2xl font-serif-display font-bold mb-6 text-center">Escolha a formação instrumental</h4>
-                        <p class="text-gray-400 mb-6 -mt-4 text-center">Arraste para o lado para ver as opções.</p>
-                        
-                        <!-- Container do Carrossel -->
-                        <div class="relative">
-                            <div class="flex overflow-x-auto space-x-4 pb-4 scroll-snap-x-mandatory scrollbar-hide -mx-8 px-8">
-                                <!-- Slide 1: Formação Singela -->
-                                <div class="scroll-snap-align-center flex-shrink-0 w-[85%] md:w-[48%]">
-                                    <input type="radio" name="instrumentalFormation" id="singela" value="Formação Singela: 1 Violino, 1 Violoncelo, 1 Piano Digital" class="hidden peer">
-                                    <label for="singela" class="cursor-pointer block p-4 border-2 border-gray-600 rounded-lg peer-checked:border-gold-text peer-checked:bg-gold-text/10 hover:border-gold-text transition-all h-full">
-                                        <img src="./imagens/formacao_1.jpg" alt="[Imagem da Formação Singela]" class="w-full h-48 object-cover rounded-md mb-4" onerror="this.onerror=null;this.src='https://placehold.co/600x400/1a1a1a/eaeaea?text=Formação+1';">
-                                        <span class="font-semibold block text-lg text-center">Formação Singela</span>
-                                        <span class="text-sm text-gray-400 block mt-1 text-center">1 Violino, 1 Violoncelo, 1 Piano Digital</span>
-                                    </label>
-                                </div>
-                                
-                                <!-- Slide 2: Quarteto de Cordas -->
-                                <div class="scroll-snap-align-center flex-shrink-0 w-[85%] md:w-[48%]">
-                                    <input type="radio" name="instrumentalFormation" id="quarteto_cordas" value="Quarteto de Cordas: 2 Violinos, 1 Viola, 1 Violoncelo" class="hidden peer">
-                                    <label for="quarteto_cordas" class="cursor-pointer block p-4 border-2 border-gray-600 rounded-lg peer-checked:border-gold-text peer-checked:bg-gold-text/10 hover:border-gold-text transition-all h-full">
-                                        <img src="./imagens/formacao_2.jpg" alt="[Imagem do Quarteto de Cordas]" class="w-full h-48 object-cover rounded-md mb-4" onerror="this.onerror=null;this.src='https://placehold.co/600x400/1a1a1a/eaeaea?text=Formação+2';">
-                                        <span class="font-semibold block text-lg text-center">Quarteto de Cordas</span>
-                                        <span class="text-sm text-gray-400 block mt-1 text-center">2 Violinos, 1 Viola, 1 Violoncelo</span>
-                                    </label>
-                                </div>
-
-                                <!-- Slide 3: Quarteto Versátil -->
-                                <div class="scroll-snap-align-center flex-shrink-0 w-[85%] md:w-[48%]">
-                                    <input type="radio" name="instrumentalFormation" id="quarteto_versatil" value="Quarteto Versátil: 2 Violinos, 1 Violoncelo, 1 Piano Digital" class="hidden peer">
-                                    <label for="quarteto_versatil" class="cursor-pointer block p-4 border-2 border-gray-600 rounded-lg peer-checked:border-gold-text peer-checked:bg-gold-text/10 hover:border-gold-text transition-all h-full">
-                                        <img src="./imagens/formacao_3.jpg" alt="[Imagem do Quarteto Versátil]" class="w-full h-48 object-cover rounded-md mb-4" onerror="this.onerror=null;this.src='https://placehold.co/600x400/1a1a1a/eaeaea?text=Formação+3';">
-                                        <span class="font-semibold block text-lg text-center">Quarteto Versátil</span>
-                                        <span class="text-sm text-gray-400 block mt-1 text-center">2 Violinos, 1 Violoncelo, 1 Piano Digital</span>
-                                    </label>
-                                </div>
-                                
-                                <!-- Slide 4: Formação Orquestral -->
-                                <div class="scroll-snap-align-center flex-shrink-0 w-[85%] md:w-[48%]">
-                                    <input type="radio" name="instrumentalFormation" id="orquestral" value="Formação Orquestral: 04 Violinos, 01 Viola, 01 Violoncelo, 01 Piano Digital" class="hidden peer">
-                                    <label for="orquestral" class="cursor-pointer block p-4 border-2 border-gray-600 rounded-lg peer-checked:border-gold-text peer-checked:bg-gold-text/10 hover:border-gold-text transition-all h-full">
-                                        <img src="./imagens/formacao_4.jpg" alt="[Imagem da Formação Orquestral]" class="w-full h-48 object-cover rounded-md mb-4" onerror="this.onerror=null;this.src='https://placehold.co/600x400/1a1a1a/eaeaea?text=Formação+4';">
-                                        <span class="font-semibold block text-lg text-center">Formação Orquestral</span>
-                                        <span class="text-sm text-gray-400 block mt-1 text-center">04 Violinos, 01 Viola, 01 Violoncelo, 01 Piano Digital</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="mt-8 flex justify-between">
-                            <button type="button" class="prev-step border-2 gold-border gold-text font-bold py-2 px-6 rounded-full hover:bg-gold-text hover:text-black transition-all">Anterior</button>
-                            <button type="button" class="next-step gold-bg text-black font-bold py-2 px-6 rounded-full hover:bg-opacity-90 transition-all">Próximo</button>
-                        </div>
-                    </div>
-
-
-                    <!-- Passo 3: Opcionais (MODIFICADO) -->
-                    <div id="step-3" class="step-content">
-                        <h4 class="text-2xl font-serif-display font-bold mb-6 text-center">Deseja adicionar algum opcional?</h4>
-                        <p class="text-gray-400 mb-6 -mt-4 text-center">Arraste para o lado e escolha quantos quiser.</p>
-                        
-                        <!-- Container do Carrossel -->
-                        <div class="relative">
-                            <div class="flex overflow-x-auto space-x-4 pb-4 scroll-snap-x-mandatory scrollbar-hide -mx-8 px-8">
-                                <!-- Slide 1: Clarins Triunfais -->
-                                <div class="scroll-snap-align-center flex-shrink-0 w-[85%] md:w-[48%]">
-                                    <input type="checkbox" name="optionals" id="clarins" value="Clarins Triunfais" class="hidden peer">
-                                    <label for="clarins" class="cursor-pointer block p-4 border-2 border-gray-600 rounded-lg peer-checked:border-gold-text peer-checked:bg-gold-text/10 hover:border-gold-text transition-all h-full">
-                                        <img src="./imagens/foto_opcional_1.jpg" alt="[Imagem de Clarins Triunfais]" class="w-full h-48 object-cover rounded-md mb-4" onerror="this.onerror=null;this.src='https://placehold.co/600x400/1a1a1a/eaeaea?text=Opcional+1';">
-                                        <span class="font-semibold block text-lg text-center">Clarins Triunfais</span>
-                                    </label>
-                                </div>
-                                
-                                <!-- Slide 2: Cajón (Percussão) -->
-                                <div class="scroll-snap-align-center flex-shrink-0 w-[85%] md:w-[48%]">
-                                    <input type="checkbox" name="optionals" id="cajon" value="Cajón (Percussão)" class="hidden peer">
-                                    <label for="cajon" class="cursor-pointer block p-4 border-2 border-gray-600 rounded-lg peer-checked:border-gold-text peer-checked:bg-gold-text/10 hover:border-gold-text transition-all h-full">
-                                        <img src="./imagens/foto_opcional_2.jpg" alt="[Imagem de Cajón (Percussão)]" class="w-full h-48 object-cover rounded-md mb-4" onerror="this.onerror=null;this.src='https://placehold.co/600x400/1a1a1a/eaeaea?text=Opcional+2';">
-                                        <span class="font-semibold block text-lg text-center">Cajón (Percussão)</span>
-                                    </label>
-                                </div>
-
-                                <!-- Slide 3: Cantores (1-2 Vozes) -->
-                                <div class="scroll-snap-align-center flex-shrink-0 w-[85%] md:w-[48%]">
-                                    <input type="checkbox" name="optionals" id="cantores" value="Cantores (1-2 Vozes)" class="hidden peer">
-                                    <label for="cantores" class="cursor-pointer block p-4 border-2 border-gray-600 rounded-lg peer-checked:border-gold-text peer-checked:bg-gold-text/10 hover:border-gold-text transition-all h-full">
-                                        <img src="./imagens/foto_opcional_3.jpg" alt="[Imagem de Cantores]" class="w-full h-48 object-cover rounded-md mb-4" onerror="this.onerror=null;this.src='https://placehold.co/600x400/1a1a1a/eaeaea?text=Opcional+3';">
-                                        <span class="font-semibold block text-lg text-center">Cantores (1-2 Vozes)</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="mt-8 flex justify-between">
-                            <button type="button" class="prev-step border-2 gold-border gold-text font-bold py-2 px-6 rounded-full hover:bg-gold-text hover:text-black transition-all">Anterior</button>
-                            <button type="button" class="next-step gold-bg text-black font-bold py-2 px-6 rounded-full hover:bg-opacity-90 transition-all">Próximo</button>
-                        </div>
-                    </div>
-                    
-                    <!-- Passo 4: Data e Local -->
-                    <div id="step-4" class="step-content">
-                        <h4 class="text-2xl font-serif-display font-bold mb-6">Quando e onde será o evento?</h4>
-                        <div class="grid grid-cols-1 gap-4">
-                            <input type="date" name="eventDate" class="w-full bg-gray-800 border-2 border-gray-600 rounded-lg p-3 focus:outline-none focus:border-gold-text transition-all" title="Data do Evento">
-                            <input type="text" name="eventCity" placeholder="Cidade do Evento" class="w-full bg-gray-800 border-2 border-gray-600 rounded-lg p-3 focus:outline-none focus:border-gold-text transition-all">
-                             <input type="text" name="eventVenue" placeholder="Local: Igreja, salão, ar livre (especificar)" class="w-full bg-gray-800 border-2 border-gray-600 rounded-lg p-3 focus:outline-none focus:border-gold-text transition-all">
-                        </div>
-                        <div class="mt-8 flex justify-between">
-                            <button type="button" class="prev-step border-2 gold-border gold-text font-bold py-2 px-6 rounded-full hover:bg-gold-text hover:text-black transition-all">Anterior</button>
-                            <button type="button" class="next-step gold-bg text-black font-bold py-2 px-6 rounded-full hover:bg-opacity-90 transition-all">Próximo</button>
-                        </div>
-                    </div>
-
-                    <!-- Passo 5: Momentos Desejados -->
-                    <div id="step-5" class="step-content">
-                        <h4 class="text-2xl font-serif-display font-bold mb-6">Quais momentos musicais são desejados?</h4>
-                        <textarea name="eventMoments" placeholder="Ex: Cerimônia completa, dança dos noivos, música ambiente para o jantar, etc." rows="5" class="w-full bg-gray-800 border-2 border-gray-600 rounded-lg p-3 focus:outline-none focus:border-gold-text transition-all"></textarea>
-                        <div class="mt-8 flex justify-between">
-                            <button type="button" class="prev-step border-2 gold-border gold-text font-bold py-2 px-6 rounded-full hover:bg-gold-text hover:text-black transition-all">Anterior</button>
-                            <button type="button" class="next-step gold-bg text-black font-bold py-2 px-6 rounded-full hover:bg-opacity-90 transition-all">Próximo</button>
-                        </div>
-                    </div>
-
-                    <!-- Passo 6: Cerimonial -->
-                     <div id="step-6" class="step-content">
-                        <h4 class="text-2xl font-serif-display font-bold mb-6">Qual o cerimonial responsável pelo evento?</h4>
-                        <input type="text" name="eventPlanner" placeholder="Nome do cerimonial ou organizador" class="w-full bg-gray-800 border-2 border-gray-600 rounded-lg p-3 focus:outline-none focus:border-gold-text transition-all">
-                        <div class="mt-8 flex justify-between">
-                            <button type="button" class="prev-step border-2 gold-border gold-text font-bold py-2 px-6 rounded-full hover:bg-gold-text hover:text-black transition-all">Anterior</button>
-                            <button type="button" class="next-step gold-bg text-black font-bold py-2 px-6 rounded-full hover:bg-opacity-90 transition-all">Próximo</button>
-                        </div>
-                    </div>
-                    
-                    <!-- Passo 7: Detalhes Adicionais -->
-                     <div id="step-7" class="step-content">
-                        <h4 class="text-2xl font-serif-display font-bold mb-6">Conte-nos mais detalhes</h4>
-                        <textarea name="additionalDetails" placeholder="Algo mais que devamos saber? Ex: número de convidados, estilo musical, músicas especiais..." rows="5" class="w-full bg-gray-800 border-2 border-gray-600 rounded-lg p-3 focus:outline-none focus:border-gold-text transition-all"></textarea>
-                        <div class="mt-8 flex justify-between">
-                            <button type="button" class="prev-step border-2 gold-border gold-text font-bold py-2 px-6 rounded-full hover:bg-gold-text hover:text-black transition-all">Anterior</button>
-                            <button type="button" class="next-step gold-bg text-black font-bold py-2 px-6 rounded-full hover:bg-opacity-90 transition-all">Próximo</button>
-                        </div>
-                    </div>
-
-                    <!-- Passo 8: Contato -->
-                    <div id="step-8" class="step-content">
-                        <h4 class="text-2xl font-serif-display font-bold mb-6">Suas informações de contato</h4>
+                        <h4 class="text-2xl font-serif-display text-white mb-6">Primeiro, a data e o local</h4>
                         <div class="space-y-4">
-                            <input type="text" name="clientName" placeholder="Seu Nome Completo" class="w-full bg-gray-800 border-2 border-gray-600 rounded-lg p-3 focus:outline-none focus:border-gold-text transition-all" required>
-                            <input type="email" name="clientEmail" placeholder="Seu Melhor E-mail" class="w-full bg-gray-800 border-2 border-gray-600 rounded-lg p-3 focus:outline-none focus:border-gold-text transition-all" required>
-                            <input type="tel" name="clientPhone" placeholder="Telefone / WhatsApp" class="w-full bg-gray-800 border-2 border-gray-600 rounded-lg p-3 focus:outline-none focus:border-gold-text transition-all" required>
+                            <div>
+                                <label class="block text-xs text-gray-500 uppercase mb-1">Data do Evento</label>
+                                <input type="date" name="eventDate" class="w-full bg-[#1a1a1a] border border-gray-700 text-white rounded-lg p-4 focus:border-gold-400 focus:outline-none transition-colors">
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <input type="text" name="eventCity" placeholder="Cidade" class="w-full bg-[#1a1a1a] border border-gray-700 text-white rounded-lg p-4 focus:border-gold-400 focus:outline-none transition-colors">
+                                <input type="text" name="eventVenue" placeholder="Local (Igreja/Salão)" class="w-full bg-[#1a1a1a] border border-gray-700 text-white rounded-lg p-4 focus:border-gold-400 focus:outline-none transition-colors">
+                            </div>
                         </div>
-                        <div class="mt-8 flex justify-between">
-                            <button type="button" class="prev-step border-2 gold-border gold-text font-bold py-2 px-6 rounded-full hover:bg-gold-text hover:text-black transition-all">Anterior</button>
-                            <button type="submit" class="gold-bg text-black font-bold py-2 px-6 rounded-full hover:bg-opacity-90 transition-all">Enviar Solicitação</button>
+                    </div>
+
+                    <!-- PASSO 2: O Escopo (Estratégia do Bundle) -->
+                    <div id="step-2" class="step-content">
+                        <h4 class="text-2xl font-serif-display text-white mb-2">O que você deseja musicalizar?</h4>
+                        <p class="text-sm text-gold-400 mb-6 italic">*Recomendamos o pacote completo para harmonia do evento.</p>
+                        
+                        <div class="space-y-3">
+                            <label class="flex items-center p-4 bg-[#1a1a1a] border border-gray-700 rounded-lg cursor-pointer hover:border-gold-400 transition-colors group">
+                                <input type="radio" name="scope" value="Cerimônia + Recepção (Completo)" class="w-5 h-5 text-gold-400 bg-gray-800 border-gray-600 focus:ring-gold-400" checked>
+                                <div class="ml-4">
+                                    <span class="block text-white font-bold group-hover:text-gold-400">Experiência Completa (Cerimônia + Recepção)</span>
+                                    <span class="block text-xs text-gray-400">Inclui o Bônus do Receptivo Pré-Cerimônia.</span>
+                                </div>
+                            </label>
+
+                            <label class="flex items-center p-4 bg-[#1a1a1a] border border-gray-700 rounded-lg cursor-pointer hover:border-gold-400 transition-colors">
+                                <input type="radio" name="scope" value="Apenas Cerimônia" class="w-5 h-5 text-gold-400 bg-gray-800 border-gray-600 focus:ring-gold-400">
+                                <div class="ml-4">
+                                    <span class="block text-white">Apenas Cerimônia Religiosa/Amor</span>
+                                </div>
+                            </label>
+                            
+                            <label class="flex items-center p-4 bg-[#1a1a1a] border border-gray-700 rounded-lg cursor-pointer hover:border-gold-400 transition-colors">
+                                <input type="radio" name="scope" value="Corporativo/Outros" class="w-5 h-5 text-gold-400 bg-gray-800 border-gray-600 focus:ring-gold-400">
+                                <div class="ml-4">
+                                    <span class="block text-white">Corporativo / Outros</span>
+                                </div>
+                            </label>
                         </div>
+                    </div>
+
+                    <!-- PASSO 3: Formação Preferida -->
+                    <div id="step-3" class="step-content">
+                        <h4 class="text-2xl font-serif-display text-white mb-6">Qual formação chamou sua atenção?</h4>
+                        <div class="grid grid-cols-2 gap-4">
+                            <label class="cursor-pointer">
+                                <input type="radio" name="formation" value="Singela" class="peer hidden">
+                                <div class="p-4 bg-[#1a1a1a] border border-gray-700 rounded-lg peer-checked:border-gold-400 peer-checked:bg-gold-900/20 hover:bg-gray-800 transition-all text-center h-full flex flex-col justify-center">
+                                    <span class="text-2xl mb-2">🎻</span>
+                                    <span class="text-white font-bold text-sm">Singela</span>
+                                    <span class="text-xs text-gray-500 mt-1">Trio</span>
+                                </div>
+                            </label>
+                            <label class="cursor-pointer">
+                                <input type="radio" name="formation" value="Quarteto de Cordas" class="peer hidden">
+                                <div class="p-4 bg-[#1a1a1a] border border-gray-700 rounded-lg peer-checked:border-gold-400 peer-checked:bg-gold-900/20 hover:bg-gray-800 transition-all text-center h-full flex flex-col justify-center">
+                                    <span class="text-2xl mb-2">🎼</span>
+                                    <span class="text-white font-bold text-sm">Quarteto Cordas</span>
+                                    <span class="text-xs text-gray-500 mt-1">Clássico</span>
+                                </div>
+                            </label>
+                            <label class="cursor-pointer">
+                                <input type="radio" name="formation" value="Quarteto Versátil" class="peer hidden">
+                                <div class="p-4 bg-[#1a1a1a] border border-gray-700 rounded-lg peer-checked:border-gold-400 peer-checked:bg-gold-900/20 hover:bg-gray-800 transition-all text-center h-full flex flex-col justify-center">
+                                    <span class="text-2xl mb-2">🎹</span>
+                                    <span class="text-white font-bold text-sm">Quarteto Versátil</span>
+                                    <span class="text-xs text-gray-500 mt-1">Moderno</span>
+                                </div>
+                            </label>
+                            <label class="cursor-pointer">
+                                <input type="radio" name="formation" value="Orquestral" class="peer hidden">
+                                <div class="p-4 bg-[#1a1a1a] border border-gray-700 rounded-lg peer-checked:border-gold-400 peer-checked:bg-gold-900/20 hover:bg-gray-800 transition-all text-center h-full flex flex-col justify-center">
+                                    <span class="text-2xl mb-2">🎺</span>
+                                    <span class="text-white font-bold text-sm">Orquestra Premium</span>
+                                    <span class="text-xs text-gray-500 mt-1">Impactante</span>
+                                </div>
+                            </label>
+                        </div>
+                        <div class="mt-4 p-4 bg-[#1a1a1a] rounded-lg border border-gray-700">
+                            <p class="text-xs text-gray-400 mb-2">Interesse em Opcionais?</p>
+                            <div class="flex gap-4 overflow-x-auto pb-2">
+                                <label class="inline-flex items-center"><input type="checkbox" name="extras" value="Clarins" class="mr-2 accent-gold-400"><span class="text-sm text-white">Clarins</span></label>
+                                <label class="inline-flex items-center"><input type="checkbox" name="extras" value="Voz" class="mr-2 accent-gold-400"><span class="text-sm text-white">Cantores</span></label>
+                                <label class="inline-flex items-center"><input type="checkbox" name="extras" value="Percussão" class="mr-2 accent-gold-400"><span class="text-sm text-white">Percussão</span></label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PASSO 4: Estilo da Recepção (Venda Cruzada) -->
+                    <div id="step-4" class="step-content">
+                        <h4 class="text-2xl font-serif-display text-white mb-2">Para a Festa...</h4>
+                        <p class="text-gray-400 text-sm mb-6">Se selecionou "Experiência Completa", qual vibe você imagina?</p>
+                        
+                        <select name="receptionStyle" class="w-full bg-[#1a1a1a] border border-gray-700 text-white rounded-lg p-4 focus:border-gold-400 focus:outline-none mb-4">
+                            <option value="Não selecionei festa">Ainda não decidi / Apenas Cerimônia</option>
+                            <option value="Mini Banda (Animada)">Mini Banda Acústica (Animada)</option>
+                            <option value="Violão e Voz (Intimista)">Violão e Voz (Intimista/Jantar)</option>
+                        </select>
+                        
+                        <textarea name="details" placeholder="Detalhes extras? (Ex: Música especial para entrada, cerimonialista, etc)" rows="3" class="w-full bg-[#1a1a1a] border border-gray-700 text-white rounded-lg p-4 focus:border-gold-400 focus:outline-none"></textarea>
+                    </div>
+
+                    <!-- PASSO 5: Contato -->
+                    <div id="step-5" class="step-content">
+                        <h4 class="text-2xl font-serif-display text-white mb-6">Onde enviamos a proposta?</h4>
+                        <div class="space-y-4">
+                            <input type="text" name="clientName" placeholder="Seu Nome" required class="w-full bg-[#1a1a1a] border border-gray-700 text-white rounded-lg p-4 focus:border-gold-400">
+                            <input type="email" name="clientEmail" placeholder="Seu E-mail" required class="w-full bg-[#1a1a1a] border border-gray-700 text-white rounded-lg p-4 focus:border-gold-400">
+                            <input type="tel" name="clientPhone" placeholder="WhatsApp (com DDD)" required class="w-full bg-[#1a1a1a] border border-gray-700 text-white rounded-lg p-4 focus:border-gold-400">
+                        </div>
+                    </div>
+
+                    <!-- Navegação -->
+                    <div class="absolute bottom-0 left-0 right-0 flex justify-between mt-8 pt-6 border-t border-white/10">
+                        <button type="button" id="prevBtn" class="text-gray-400 hover:text-white px-4 py-2 rounded hidden">Voltar</button>
+                        <button type="button" id="nextBtn" class="bg-gold-500 hover:bg-gold-400 text-black font-bold px-8 py-3 rounded-full transition-all shadow-[0_0_15px_rgba(212,175,55,0.3)] ml-auto">
+                            Continuar
+                        </button>
+                        <button type="submit" id="submitBtn" class="hidden bg-gradient-to-r from-gold-500 to-rose-500 text-black font-bold px-8 py-3 rounded-full transition-all hover:scale-105 ml-auto">
+                            Solicitar Orçamento VIP
+                        </button>
                     </div>
                 </form>
-
             </div>
         </div>
     </section>
 
     <!-- Rodapé -->
-    <footer class="py-10 bg-black">
-        <div class="container mx-auto px-6 text-center text-gray-400">
-            <p>&copy; 2025 Guaraoby Produções Musicais. Todos os direitos reservados.</p>
-            <div class="flex justify-center space-x-6 mt-4">
-                <a href="https://www.instagram.com/gebom" target="_blank" class="hover:text-gold-text transition-colors">Instagram</a>
+    <footer class="py-12 bg-black border-t border-white/10">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-2xl font-serif-display font-bold text-white tracking-wide mb-4">Guaraoby<span class="text-gold-400">.</span></h2>
+            <p class="text-gray-500 text-sm mb-6">Criando a trilha sonora da sua vida desde 2010.</p>
+            <div class="flex justify-center space-x-6 mb-8">
+                <a href="https://www.instagram.com/gebom" target="_blank" class="text-gray-400 hover:text-rose-400 transition-colors">Instagram</a>
+                <a href="#" class="text-gray-400 hover:text-rose-400 transition-colors">WhatsApp</a>
             </div>
+            <p class="text-gray-600 text-xs">&copy; 2025 Guaraoby Produções Musicais. Todos os direitos reservados.</p>
         </div>
     </footer>
 
-
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // --- LÓGICA DO PLAYER DE ÁUDIO ---
+            
+            // --- Player de Áudio ---
             const audioPlayer = document.getElementById('audio-player');
             const playPauseBtn = document.getElementById('play-pause-btn');
             const playIcon = document.getElementById('play-icon');
             const pauseIcon = document.getElementById('pause-icon');
+            const visualizer = document.getElementById('visualizer');
 
             playPauseBtn.addEventListener('click', () => {
-                const isPlaying = !audioPlayer.paused;
-                if (isPlaying) {
-                    audioPlayer.pause();
-                    playIcon.style.display = 'block';
-                    pauseIcon.style.display = 'none';
-                } else {
+                if (audioPlayer.paused) {
                     audioPlayer.play();
-                    playIcon.style.display = 'none';
-                    pauseIcon.style.display = 'block';
+                    playIcon.classList.add('hidden');
+                    pauseIcon.classList.remove('hidden');
+                    visualizer.classList.remove('paused');
+                } else {
+                    audioPlayer.pause();
+                    playIcon.classList.remove('hidden');
+                    pauseIcon.classList.add('hidden');
+                    visualizer.classList.add('paused');
                 }
             });
-
-            // Resetar o botão quando a música terminar
-            audioPlayer.addEventListener('ended', () => {
-                playIcon.style.display = 'block';
-                pauseIcon.style.display = 'none';
-            });
-
+            
+            // Start paused visual state
+            visualizer.classList.add('paused');
 
             // --- Animações de Scroll ---
-            const revealElements = document.querySelectorAll('.reveal');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -554,87 +567,109 @@
                     }
                 });
             }, { threshold: 0.1 });
-            revealElements.forEach(el => observer.observe(el));
 
-            // --- Menu Mobile ---
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+            // --- Mobile Menu ---
+            const mobileBtn = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
-            mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
-            
-            // --- Formulário Multi-Step ---
-            const form = document.getElementById('quote-form');
-            const steps = Array.from(form.querySelectorAll('.step-content'));
-            const progressBar = document.getElementById('progress-bar');
-            const stepName = document.getElementById('step-name');
-            let currentStep = 0;
-            const totalSteps = steps.length;
+            mobileBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
 
-            const updateFormStep = () => {
-                steps.forEach((step, index) => step.classList.toggle('active', index === currentStep));
-                const progressPercentage = ((currentStep + 1) / totalSteps) * 100;
-                progressBar.style.width = `${progressPercentage}%`;
-                stepName.textContent = `Passo ${currentStep + 1} de ${totalSteps}`;
-            };
-            
-            form.addEventListener('click', (e) => {
-                if (e.target.matches('.next-step')) {
-                    if (currentStep < totalSteps - 1) {
-                        currentStep++;
-                        updateFormStep();
+            // --- Formulário Multi-Step Lógica ---
+            const steps = Array.from(document.querySelectorAll('.step-content'));
+            const nextBtn = document.getElementById('nextBtn');
+            const prevBtn = document.getElementById('prevBtn');
+            const submitBtn = document.getElementById('submitBtn');
+            const progressBar = document.getElementById('progress-bar');
+            const stepLabel = document.getElementById('step-label');
+            const stepCounter = document.getElementById('step-counter');
+            let currentStep = 0;
+
+            const stepLabels = ["Data & Local", "O Escopo", "Formação", "Estilo Festa", "Seus Dados"];
+
+            function updateUI() {
+                steps.forEach((step, index) => {
+                    if(index === currentStep) {
+                        step.classList.add('active');
+                        step.style.animation = 'fadeIn 0.5s ease';
+                    } else {
+                        step.classList.remove('active');
                     }
-                } else if (e.target.matches('.prev-step')) {
-                     if (currentStep > 0) {
-                        currentStep--;
-                        updateFormStep();
+                });
+
+                // Botoes
+                prevBtn.classList.toggle('hidden', currentStep === 0);
+                if (currentStep === steps.length - 1) {
+                    nextBtn.classList.add('hidden');
+                    submitBtn.classList.remove('hidden');
+                } else {
+                    nextBtn.classList.remove('hidden');
+                    submitBtn.classList.add('hidden');
+                }
+
+                // Progress Bar
+                const progress = ((currentStep + 1) / steps.length) * 100;
+                progressBar.style.width = `${progress}%`;
+                stepLabel.innerText = stepLabels[currentStep];
+                stepCounter.innerText = `${currentStep + 1}/${steps.length}`;
+            }
+
+            nextBtn.addEventListener('click', () => {
+                // Validação simples (pode ser expandida)
+                const currentInputs = steps[currentStep].querySelectorAll('input[required], select[required]');
+                let valid = true;
+                currentInputs.forEach(input => {
+                    if (!input.value) {
+                        valid = false;
+                        input.classList.add('border-red-500');
+                    } else {
+                        input.classList.remove('border-red-500');
                     }
+                });
+
+                if (valid && currentStep < steps.length - 1) {
+                    currentStep++;
+                    updateUI();
                 }
             });
 
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-                
-                const formData = new FormData(form);
-                const data = {
-                    eventType: formData.get('eventType') || "Não informado",
-                    instrumentalFormation: formData.get('instrumentalFormation') || "Não informado",
-                    optionals: formData.getAll('optionals').join(', ') || "Nenhum",
-                    eventDate: formData.get('eventDate') || "Não informado",
-                    eventCity: formData.get('eventCity') || "Não informado",
-                    eventVenue: formData.get('eventVenue') || "Não informado",
-                    eventMoments: formData.get('eventMoments') || "Não informado",
-                    eventPlanner: formData.get('eventPlanner') || "Não informado",
-                    additionalDetails: formData.get('additionalDetails') || "Nenhum",
-                    clientName: formData.get('clientName'),
-                    clientEmail: formData.get('clientEmail'),
-                    clientPhone: formData.get('clientPhone'),
-                };
-
-                const message = `Olá, Rafael! Gostaria de solicitar um orçamento para o meu evento.\n\n` +
-                                `*SOLICITAÇÃO DE ORÇAMENTO - GUARAOBY*\n\n` +
-                                `*Tipo de Evento:*\n${data.eventType}\n\n` +
-                                `*Formação Instrumental:*\n${data.instrumentalFormation}\n\n` +
-                                `*Opcionais:*\n${data.optionals}\n\n` +
-                                `*Data e Local:*\nData: ${data.eventDate}\nCidade: ${data.eventCity}\nLocal: ${data.eventVenue}\n\n` +
-                                `*Momentos Musicais:*\n${data.eventMoments}\n\n` +
-                                `*Cerimonial Responsável:*\n${data.eventPlanner}\n\n` +
-                                `*Detalhes Adicionais:*\n${data.additionalDetails}\n\n` +
-                                `----------------------------------\n` +
-                                `*DADOS DE CONTATO*\n` +
-                                `*Nome:* ${data.clientName}\n` +
-                                `*E-mail:* ${data.clientEmail}\n` +
-                                `*Telefone:* ${data.clientPhone}\n\n` +
-                                `Agradeço o contato e aguardo o retorno.`;
-                
-                const whatsappNumber = "5567981339514";
-                const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-                
-                window.open(whatsappURL, '_blank');
+            prevBtn.addEventListener('click', () => {
+                if (currentStep > 0) {
+                    currentStep--;
+                    updateUI();
+                }
             });
 
-            updateFormStep(); // Initialize
+            // --- Envio WhatsApp ---
+            const form = document.getElementById('quote-form');
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const formData = new FormData(form);
+                
+                // Captura os checkbox
+                const extras = [];
+                form.querySelectorAll('input[name="extras"]:checked').forEach(el => extras.push(el.value));
+
+                const msg = `*NOVA SOLICITAÇÃO DE ORÇAMENTO - GUARAOBY*\n\n` +
+                    `*👤 Cliente:* ${formData.get('clientName')}\n` +
+                    `*📅 Data:* ${formData.get('eventDate')}\n` +
+                    `*📍 Local:* ${formData.get('eventCity')} - ${formData.get('eventVenue')}\n\n` +
+                    `*📦 Escopo:* ${formData.get('scope')}\n` +
+                    `*🎻 Formação:* ${formData.get('formation') || 'Não selecionada'}\n` +
+                    `*➕ Extras:* ${extras.join(', ') || 'Nenhum'}\n` +
+                    `*🎉 Estilo Recepção:* ${formData.get('receptionStyle')}\n` +
+                    `*📝 Detalhes:* ${formData.get('details')}\n\n` +
+                    `*📞 Contato:* ${formData.get('clientPhone')}\n` +
+                    `*📧 Email:* ${formData.get('clientEmail')}`;
+
+                const whatsappNumber = "5567981339514"; 
+                window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(msg)}`, '_blank');
+            });
+
+            updateUI(); // Init
         });
     </script>
-
 </body>
 </html>
-
