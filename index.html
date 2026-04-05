@@ -106,7 +106,7 @@
             position: relative;
         }
         .seta-fluxo::after {
-            content: '→';
+            content: '↓'; /* No mobile a seta aponta para baixo */
             font-size: 2rem;
             color: rgba(255,255,255,0.3);
             display: block;
@@ -114,6 +114,7 @@
         }
         @media (min-width: 768px) {
             .seta-fluxo::after {
+                content: '→'; /* No desktop aponta para o lado */
                 position: absolute;
                 right: -25px;
                 top: 50%;
@@ -159,10 +160,11 @@
     <section class="hero-bg min-h-screen flex items-center justify-center relative">
         <div class="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-[#0a0a0a]"></div>
         
-        <div class="container mx-auto px-6 relative z-10 text-center pt-20">
+        <div class="container mx-auto px-6 relative z-10 text-center pt-24 md:pt-20">
             <div class="reveal visible flex flex-col items-center">
                 <span class="text-gold-400 tracking-[0.3em] uppercase text-sm mb-4">Desde 2010</span>
-                <img src="./imagens/foto_guaraoby.jpg" alt="Logo Guaraoby" class="h-48 md:h-64 w-auto mb-8 drop-shadow-2xl rounded-full border-2 border-white/10">
+                <!-- Logo otimizada para ser menor em telas de celular (h-32) e maior no desktop (md:h-64) -->
+                <img src="./imagens/foto_guaraoby.jpg" alt="Logo Guaraoby" class="h-32 sm:h-48 md:h-64 w-auto mb-8 drop-shadow-2xl rounded-full border-2 border-white/10">
                 
                 <h2 class="text-4xl md:text-6xl lg:text-7xl font-serif-display text-white leading-tight">
                     Não é apenas música.<br>
@@ -170,24 +172,24 @@
                 </h2>
                 
                 <p class="text-lg md:text-xl mt-6 max-w-2xl mx-auto text-gray-300 font-light">
-                    Transformamos sua cerimônia em um filme e sua recepção em uma festa inesquecível.
+                    Cuidamos de cada detalhe da trilha sonora para que sua cerimônia e recepção fluam com emoção, elegância e segurança.
                 </p>
 
                 <!-- Player Minimalista -->
-                <div class="mt-10 bg-white/5 backdrop-blur-md border border-white/10 rounded-full p-2 pr-6 flex items-center gap-4 hover:border-gold-400/50 transition-colors cursor-pointer group" id="audio-controller">
-                    <button id="play-pause-btn" class="w-12 h-12 bg-gold-400 rounded-full flex items-center justify-center text-black group-hover:scale-110 transition-transform">
-                        <svg id="play-icon" class="w-5 h-5 ml-1" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4l12 6-12 6z"/></svg>
-                        <svg id="pause-icon" class="w-5 h-5 hidden" fill="currentColor" viewBox="0 0 20 20"><path d="M6 4h3v12H6zm5 0h3v12h-3z"/></svg>
+                <div class="mt-8 md:mt-10 bg-white/5 backdrop-blur-md border border-white/10 rounded-full p-2 pr-6 flex items-center gap-4 hover:border-gold-400/50 transition-colors cursor-pointer group" id="audio-controller">
+                    <button id="play-pause-btn" class="w-10 h-10 md:w-12 md:h-12 bg-gold-400 rounded-full flex items-center justify-center text-black group-hover:scale-110 transition-transform">
+                        <svg id="play-icon" class="w-4 h-4 md:w-5 md:h-5 ml-1" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4l12 6-12 6z"/></svg>
+                        <svg id="pause-icon" class="w-4 h-4 md:w-5 md:h-5 hidden" fill="currentColor" viewBox="0 0 20 20"><path d="M6 4h3v12H6zm5 0h3v12h-3z"/></svg>
                     </button>
                     <div class="text-left">
-                        <p class="text-xs text-gold-400 uppercase tracking-wider">Now Playing</p>
-                        <p class="text-sm font-serif-display text-white">Hallelujah - Guaraoby Strings</p>
+                        <p class="text-[10px] md:text-xs text-gold-400 uppercase tracking-wider">Now Playing</p>
+                        <p class="text-sm font-serif-display text-white truncate max-w-[150px] md:max-w-none">Hallelujah - Guaraoby Strings</p>
                     </div>
-                    <div class="flex items-end gap-1 h-5 ml-2" id="visualizer">
-                        <div class="audio-wave-bar h-3"></div>
-                        <div class="audio-wave-bar h-5" style="animation-delay: 0.1s"></div>
-                        <div class="audio-wave-bar h-2" style="animation-delay: 0.2s"></div>
-                        <div class="audio-wave-bar h-4" style="animation-delay: 0.3s"></div>
+                    <div class="flex items-end gap-1 h-4 md:h-5 ml-2" id="visualizer">
+                        <div class="audio-wave-bar h-2 md:h-3"></div>
+                        <div class="audio-wave-bar h-4 md:h-5" style="animation-delay: 0.1s"></div>
+                        <div class="audio-wave-bar h-1 md:h-2" style="animation-delay: 0.2s"></div>
+                        <div class="audio-wave-bar h-3 md:h-4" style="animation-delay: 0.3s"></div>
                     </div>
                     <audio id="audio-player" src="./audio/musica_exemplo.mp3"></audio>
                 </div>
@@ -195,49 +197,49 @@
         </div>
         
         <!-- Scroll Indicator -->
-        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce text-white/30">
+        <div class="absolute bottom-6 md:bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce text-white/30">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
         </div>
     </section>
 
     <!-- SEÇÃO O MÉTODO (Fluxograma Rosado) -->
-    <section id="metodo" class="py-24 relative overflow-hidden">
+    <section id="metodo" class="py-20 md:py-24 relative overflow-hidden">
         <!-- Fundo Rosado Gradiente -->
         <div class="absolute inset-0 bg-gradient-to-br from-rose-900/40 via-[#1a050a] to-[#0a0a0a]"></div>
         
         <div class="container mx-auto px-6 relative z-10">
-            <div class="text-center mb-16 reveal">
+            <div class="text-center mb-12 md:mb-16 reveal">
                 <span class="text-rose-400 tracking-widest uppercase text-xs font-bold">Nosso Diferencial</span>
-                <h3 class="text-4xl md:text-5xl font-serif-display text-white mt-2">O Caminho até o "Sim"</h3>
-                <p class="text-gray-400 mt-4 max-w-2xl mx-auto">Não vendemos apenas músicos. Entregamos uma consultoria completa para garantir que cada segundo tenha a trilha perfeita.</p>
+                <h3 class="text-3xl md:text-4xl lg:text-5xl font-serif-display text-white mt-2">O Caminho até o "Sim"</h3>
+                <p class="text-gray-400 mt-4 max-w-2xl mx-auto text-sm md:text-base">Não vendemos apenas músicos. Entregamos uma consultoria completa para garantir que cada segundo tenha a trilha perfeita.</p>
             </div>
 
             <div class="grid md:grid-cols-4 gap-6 max-w-6xl mx-auto">
                 <!-- Passo 1 -->
-                <div class="fluxo-card p-8 rounded-xl relative reveal seta-fluxo">
-                    <div class="text-4xl mb-4">✨</div>
-                    <h4 class="text-xl font-bold text-gold-400 mb-2">1. O Sonho</h4>
+                <div class="fluxo-card p-6 md:p-8 rounded-xl relative reveal seta-fluxo">
+                    <div class="text-3xl md:text-4xl mb-4">✨</div>
+                    <h4 class="text-lg md:text-xl font-bold text-gold-400 mb-2">1. O Sonho</h4>
                     <p class="text-sm text-gray-300">Entendemos sua visão. É clássico? Moderno? Na igreja ou no campo? Ouvimos o que você deseja sentir.</p>
                 </div>
 
                 <!-- Passo 2 -->
-                <div class="fluxo-card p-8 rounded-xl relative reveal seta-fluxo" style="transition-delay: 100ms">
-                    <div class="text-4xl mb-4">📋</div>
-                    <h4 class="text-xl font-bold text-gold-400 mb-2">2. A Estratégia</h4>
+                <div class="fluxo-card p-6 md:p-8 rounded-xl relative reveal seta-fluxo" style="transition-delay: 100ms">
+                    <div class="text-3xl md:text-4xl mb-4">📋</div>
+                    <h4 class="text-lg md:text-xl font-bold text-gold-400 mb-2">2. A Estratégia</h4>
                     <p class="text-sm text-gray-300">Briefing detalhado. Ajudamos a escolher a formação ideal (Instrumental ou Banda) que se encaixa na acústica e no orçamento.</p>
                 </div>
 
                 <!-- Passo 3 -->
-                <div class="fluxo-card p-8 rounded-xl relative reveal seta-fluxo" style="transition-delay: 200ms">
-                    <div class="text-4xl mb-4">🎁</div>
-                    <h4 class="text-xl font-bold text-gold-400 mb-2">3. O Presente</h4>
+                <div class="fluxo-card p-6 md:p-8 rounded-xl relative reveal seta-fluxo" style="transition-delay: 200ms">
+                    <div class="text-3xl md:text-4xl mb-4">🎁</div>
+                    <h4 class="text-lg md:text-xl font-bold text-gold-400 mb-2">3. O Presente</h4>
                     <p class="text-sm text-gray-300">Ao fechar a Cerimônia, apresentamos condições exclusivas para enriquecer a experiência dos seus convidados.</p>
                 </div>
 
                 <!-- Passo 4 -->
-                <div class="fluxo-card p-8 rounded-xl relative reveal" style="transition-delay: 300ms">
-                    <div class="text-4xl mb-4">💍</div>
-                    <h4 class="text-xl font-bold text-gold-400 mb-2">4. O Grande Dia</h4>
+                <div class="fluxo-card p-6 md:p-8 rounded-xl relative reveal" style="transition-delay: 300ms">
+                    <div class="text-3xl md:text-4xl mb-4">💍</div>
+                    <h4 class="text-lg md:text-xl font-bold text-gold-400 mb-2">4. O Grande Dia</h4>
                     <p class="text-sm text-gray-300">Execução impecável. Nossa equipe chega horas antes, alinha com o cerimonial e entrega emoção pura.</p>
                 </div>
             </div>
@@ -245,71 +247,71 @@
     </section>
 
     <!-- Seção Formações e Pacotes -->
-    <section id="formacoes" class="py-24 bg-[#0a0a0a]">
+    <section id="formacoes" class="py-20 md:py-24 bg-[#0a0a0a]">
         <div class="container mx-auto px-6">
-            <div class="reveal text-center mb-16">
-                <h3 class="text-4xl font-serif-display font-bold text-white">Nossas Coleções</h3>
-                <p class="text-gray-400 mt-2">Do intimista ao grandioso. Mantenha a essência clássica ou traga a modernidade.</p>
+            <div class="reveal text-center mb-12 md:mb-16">
+                <h3 class="text-3xl md:text-4xl font-serif-display font-bold text-white">Nossas Coleções</h3>
+                <p class="text-gray-400 mt-2 text-sm md:text-base">Do intimista ao grandioso. Mantenha a essência clássica ou traga a modernidade.</p>
             </div>
 
             <!-- Tabs Conceituais -->
-            <div class="flex justify-center gap-8 mb-12 text-sm uppercase tracking-widest reveal">
-                <button class="text-gold-400 border-b-2 border-gold-400 pb-2">Cerimônia de Amor ou Religiosa</button>
+            <div class="flex justify-center gap-8 mb-8 md:mb-12 text-xs md:text-sm uppercase tracking-widest reveal">
+                <button class="text-gold-400 border-b-2 border-gold-400 pb-2 text-center leading-snug">Cerimônia de Amor ou Religiosa</button>
             </div>
 
             <!-- Grid de Formações -->
             <div class="relative reveal">
-                <div class="flex overflow-x-auto md:grid md:grid-cols-2 lg:grid-cols-4 gap-6 pb-8 snap-x-mandatory scrollbar-hide">
+                <div class="flex overflow-x-auto md:grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 pb-8 snap-x-mandatory scrollbar-hide">
                     
                     <!-- Formação 1 -->
-                    <div class="snap-center flex-shrink-0 w-[85%] md:w-auto group relative rounded-2xl overflow-hidden aspect-[3/4]">
-                        <img src="./imagens/formacao_1.jpg" alt="Formação Singela" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-60 group-hover:opacity-40" onerror="this.onerror=null;this.src='https://placehold.co/600x800/1a1a1a/eaeaea?text=Singela';">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent p-6 flex flex-col justify-end">
-                            <h4 class="text-2xl font-serif-display text-white">Formação Singela</h4>
-                            <p class="text-gray-300 text-sm mt-2 mb-4">1 Violino, 1 Violoncelo, 1 Piano Digital.</p>
+                    <div class="snap-center flex-shrink-0 w-[85%] sm:w-[60%] md:w-auto group relative rounded-2xl overflow-hidden aspect-[3/4]">
+                        <img src="./imagens/formacao_1.jpg" alt="Formação Inicial" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-60 group-hover:opacity-40" onerror="this.onerror=null;this.src='https://placehold.co/600x800/1a1a1a/eaeaea?text=Inicial';">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent p-5 md:p-6 flex flex-col justify-end">
+                            <h4 class="text-xl md:text-2xl font-serif-display text-white">Formação Inicial</h4>
+                            <p class="text-gray-300 text-xs md:text-sm mt-2 mb-4">2 Violinos, 1 Violoncelo, 1 Piano Digital.</p>
                             <div class="border-t border-white/20 pt-4">
-                                <p class="text-gold-400 text-xs uppercase">Ideal para:</p>
-                                <p class="text-white text-sm">Mini Weddings e Capelas</p>
+                                <p class="text-gold-400 text-[10px] md:text-xs uppercase">Ideal para:</p>
+                                <p class="text-white text-xs md:text-sm">Mini weddings, capelas e casamentos ao ar livre</p>
                             </div>
                         </div>
                     </div>
 
                     <!-- Formação 2 -->
-                    <div class="snap-center flex-shrink-0 w-[85%] md:w-auto group relative rounded-2xl overflow-hidden aspect-[3/4]">
+                    <div class="snap-center flex-shrink-0 w-[85%] sm:w-[60%] md:w-auto group relative rounded-2xl overflow-hidden aspect-[3/4]">
                         <img src="./imagens/formacao_2.jpg" alt="Quarteto de Cordas" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-60 group-hover:opacity-40" onerror="this.onerror=null;this.src='https://placehold.co/600x800/1a1a1a/eaeaea?text=Cordas';">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent p-6 flex flex-col justify-end">
-                            <h4 class="text-2xl font-serif-display text-white">Quarteto de Cordas</h4>
-                            <p class="text-gray-300 text-sm mt-2 mb-4">2 Violinos, 1 Viola, 1 Violoncelo.</p>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent p-5 md:p-6 flex flex-col justify-end">
+                            <h4 class="text-xl md:text-2xl font-serif-display text-white">Quarteto de Cordas</h4>
+                            <p class="text-gray-300 text-xs md:text-sm mt-2 mb-4">2 Violinos, 1 Viola, 1 Violoncelo, 1 Piano Digital.</p>
                             <div class="border-t border-white/20 pt-4">
-                                <p class="text-gold-400 text-xs uppercase">Ideal para:</p>
-                                <p class="text-white text-sm">Igrejas Clássicas e Elegância Pura</p>
+                                <p class="text-gold-400 text-[10px] md:text-xs uppercase">Ideal para:</p>
+                                <p class="text-white text-xs md:text-sm">Mini Weddings, igrejas clássicas, capelas, casamento ao ar livre</p>
                             </div>
                         </div>
                     </div>
 
                     <!-- Formação 3 -->
-                    <div class="snap-center flex-shrink-0 w-[85%] md:w-auto group relative rounded-2xl overflow-hidden aspect-[3/4]">
-                        <img src="./imagens/formacao_3.jpg" alt="Quarteto Versátil" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-60 group-hover:opacity-40" onerror="this.onerror=null;this.src='https://placehold.co/600x800/1a1a1a/eaeaea?text=Versatil';">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent p-6 flex flex-col justify-end">
-                            <div class="absolute top-4 right-4 bg-gold-500 text-black text-xs font-bold px-3 py-1 rounded-full">MAIS PEDIDO</div>
-                            <h4 class="text-2xl font-serif-display text-white">Quarteto Versátil</h4>
-                            <p class="text-gray-300 text-sm mt-2 mb-4">2 Violinos, 1 Violoncelo, 1 Piano.</p>
+                    <div class="snap-center flex-shrink-0 w-[85%] sm:w-[60%] md:w-auto group relative rounded-2xl overflow-hidden aspect-[3/4]">
+                        <img src="./imagens/formacao_3.jpg" alt="Formação Completa" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-60 group-hover:opacity-40" onerror="this.onerror=null;this.src='https://placehold.co/600x800/1a1a1a/eaeaea?text=Completa';">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent p-5 md:p-6 flex flex-col justify-end">
+                            <div class="absolute top-4 right-4 bg-gold-500 text-black text-[10px] md:text-xs font-bold px-3 py-1 rounded-full">MAIS PEDIDO</div>
+                            <h4 class="text-xl md:text-2xl font-serif-display text-white">Formação Completa</h4>
+                            <p class="text-gray-300 text-xs md:text-sm mt-2 mb-4">2 Violinos, 1 Violoncelo, 1 Piano, Cantor, Percussão (Cajón Box).</p>
                             <div class="border-t border-white/20 pt-4">
-                                <p class="text-gold-400 text-xs uppercase">Ideal para:</p>
-                                <p class="text-white text-sm">Repertório Pop e Moderno</p>
+                                <p class="text-gold-400 text-[10px] md:text-xs uppercase">Ideal para:</p>
+                                <p class="text-white text-xs md:text-sm">Repertório Pop e Moderno</p>
                             </div>
                         </div>
                     </div>
 
                     <!-- Formação 4 -->
-                    <div class="snap-center flex-shrink-0 w-[85%] md:w-auto group relative rounded-2xl overflow-hidden aspect-[3/4]">
+                    <div class="snap-center flex-shrink-0 w-[85%] sm:w-[60%] md:w-auto group relative rounded-2xl overflow-hidden aspect-[3/4]">
                         <img src="./imagens/formacao_4.jpg" alt="Orquestra Premium" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-60 group-hover:opacity-40" onerror="this.onerror=null;this.src='https://placehold.co/600x800/1a1a1a/eaeaea?text=Orquestral';">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent p-6 flex flex-col justify-end">
-                            <h4 class="text-2xl font-serif-display text-white">Orquestra Premium</h4>
-                            <p class="text-gray-300 text-sm mt-2 mb-4">4 Violinos, Viola, Cello, Piano.</p>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent p-5 md:p-6 flex flex-col justify-end">
+                            <h4 class="text-xl md:text-2xl font-serif-display text-white">Orquestra Premium</h4>
+                            <p class="text-gray-300 text-xs md:text-sm mt-2 mb-4">4 Violinos, Violoncelo, Piano Digital, Cajón Box, Cantor, Trompetes Triunfais.</p>
                             <div class="border-t border-white/20 pt-4">
-                                <p class="text-gold-400 text-xs uppercase">Ideal para:</p>
-                                <p class="text-white text-sm">Catedrais e Impacto Sonoro</p>
+                                <p class="text-gold-400 text-[10px] md:text-xs uppercase">Ideal para:</p>
+                                <p class="text-white text-xs md:text-sm">Catedrais, casamento ao ar livre, capelas</p>
                             </div>
                         </div>
                     </div>
@@ -317,32 +319,33 @@
             </div>
 
             <!-- A ESTRATÉGIA DO GANHO / BÔNUS -->
-            <div class="mt-20 bg-white/5 border border-gold-500/30 rounded-2xl p-8 md:p-12 relative overflow-hidden reveal">
+            <div class="mt-16 md:mt-20 bg-white/5 border border-gold-500/30 rounded-2xl p-6 sm:p-8 md:p-12 relative overflow-hidden reveal">
                 <div class="absolute top-0 right-0 -mt-10 -mr-10 w-40 h-40 bg-gold-500/20 rounded-full blur-3xl"></div>
                 
-                <div class="grid md:grid-cols-2 gap-12 items-center relative z-10">
+                <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center relative z-10">
                     <div>
-                        <span class="text-gold-400 uppercase tracking-widest text-sm font-bold">Seu Presente Especial</span>
-                        <h3 class="text-3xl md:text-4xl font-serif-display text-white mt-2 mb-4">Receptivo Pré-Cerimônia</h3>
-                        <p class="text-gray-300 mb-6">
-                            Entendemos que o evento começa antes mesmo da noiva entrar. Por isso, ao fechar a cerimônia, oferecemos o <strong>Receptivo (15min)</strong> para acolher seus convidados com elegância enquanto aguardam.
+                        <span class="text-gold-400 uppercase tracking-widest text-[10px] md:text-sm font-bold">Seu Presente Especial</span>
+                        <h3 class="text-2xl sm:text-3xl md:text-4xl font-serif-display text-white mt-2 mb-4">Receptivo Pré-Cerimônia</h3>
+                        <p class="text-gray-300 mb-6 text-sm md:text-base">
+                            Entendemos que o evento começa antes mesmo da noiva entrar. Por isso, ao fechar a cerimônia, oferecemos um <strong>receptivo de 15 minutos</strong> para acolher seus convidados com elegância enquanto aguardam. <span class="text-gold-400 font-bold">Isso é um bônus incluso.</span>
                         </p>
-                        <p class="text-gray-400 mb-4 text-sm font-bold uppercase tracking-wider">E para a Festa?</p>
-                        <ul class="space-y-3 text-gray-400 mb-8">
-                            <li class="flex items-center gap-3">
-                                <span class="text-gold-400">✓</span> Violão e Voz (Para Jantares Intimistas)
-                            </li>
-                            <li class="flex items-center gap-3">
-                                <span class="text-gold-400">✓</span> Mini Banda Acústica (Para Animar)
-                            </li>
-                        </ul>
-                        <div class="bg-gradient-to-r from-gold-600/20 to-transparent border-l-4 border-gold-500 p-4">
-                            <p class="text-white text-sm italic">"Garantimos a atmosfera perfeita desde a chegada do primeiro convidado."</p>
+                        
+                        <p class="text-gray-400 mb-3 md:mb-4 text-xs md:text-sm font-bold uppercase tracking-wider">E para a Festa?</p>
+                        <p class="text-gray-300 mb-6 text-sm md:text-base">
+                            A cerimônia nupcial é uma coisa e o jantar é outra. Trabalhamos com um <strong>projeto estratégico de Banda para o Jantar</strong> com duração de duas horas. Este projeto é combinado à parte da cerimônia, ideal para encantar os convidados na recepção.
+                        </p>
+
+                        <div class="bg-gradient-to-r from-gold-600/20 to-transparent border-l-4 border-gold-500 p-4 mb-6">
+                            <p class="text-white text-xs md:text-sm italic">"Garantimos os dois momentos da festa com perfeição, do início da cerimônia até o jantar."</p>
                         </div>
+
+                        <p class="text-gold-400 text-xs md:text-sm font-bold">
+                            🎁 Condição Especial: Se o casal fechar a cerimônia e também o receptivo de 2 horas com a banda no jantar, conseguimos um desconto especial no pacote completo!
+                        </p>
                     </div>
-                    <div class="relative h-64 md:h-full rounded-xl overflow-hidden">
+                    <div class="relative h-48 sm:h-64 md:h-full rounded-xl overflow-hidden">
                         <img src="./imagens/foto_casamento_receptivo.jpg" alt="Receptivo Pré-Cerimônia" class="absolute inset-0 w-full h-full object-cover" onerror="this.onerror=null;this.src='https://placehold.co/800x600/2a2a2a/eaeaea?text=Receptivo+Pre-Cerimonia';">
-                        <div class="absolute bottom-4 right-4 bg-black/80 backdrop-blur text-white px-4 py-2 rounded-lg text-sm font-bold">
+                        <div class="absolute bottom-4 right-4 bg-black/80 backdrop-blur text-white px-3 py-2 md:px-4 md:py-2 rounded-lg text-xs md:text-sm font-bold">
                             Bônus Incluso
                         </div>
                     </div>
@@ -354,30 +357,30 @@
     <!-- Seção Portfólio Rápido -->
     <section id="portfolio" class="py-20 bg-[#0f0f0f]">
         <div class="container mx-auto px-6">
-            <div class="reveal text-center mb-12">
-                <h3 class="text-4xl font-serif-display font-bold text-white">Momentos Reais</h3>
+            <div class="reveal text-center mb-10 md:mb-12">
+                <h3 class="text-3xl md:text-4xl font-serif-display font-bold text-white">Momentos Reais</h3>
             </div>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-6xl mx-auto">
-                <img class="h-48 md:h-64 w-full object-cover rounded-lg hover:opacity-80 transition-opacity cursor-pointer" src="./imagens/formacao_1.jpg" alt="Momento 1">
-                <img class="h-48 md:h-64 w-full object-cover rounded-lg hover:opacity-80 transition-opacity cursor-pointer" src="./imagens/formacao_2.jpg" alt="Momento 2">
-                <img class="h-48 md:h-64 w-full object-cover rounded-lg hover:opacity-80 transition-opacity cursor-pointer" src="./imagens/foto_casamento_7.jpg" alt="Momento 3">
-                <img class="h-48 md:h-64 w-full object-cover rounded-lg hover:opacity-80 transition-opacity cursor-pointer" src="./imagens/foto_casamento_1.jpg" alt="Momento 4">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 max-w-6xl mx-auto">
+                <img class="h-32 sm:h-48 md:h-64 w-full object-cover rounded-lg hover:opacity-80 transition-opacity cursor-pointer" src="./imagens/formacao_1.jpg" alt="Momento 1">
+                <img class="h-32 sm:h-48 md:h-64 w-full object-cover rounded-lg hover:opacity-80 transition-opacity cursor-pointer" src="./imagens/formacao_2.jpg" alt="Momento 2">
+                <img class="h-32 sm:h-48 md:h-64 w-full object-cover rounded-lg hover:opacity-80 transition-opacity cursor-pointer" src="./imagens/foto_casamento_7.jpg" alt="Momento 3">
+                <img class="h-32 sm:h-48 md:h-64 w-full object-cover rounded-lg hover:opacity-80 transition-opacity cursor-pointer" src="./imagens/foto_casamento_1.jpg" alt="Momento 4">
             </div>
         </div>
     </section>
 
     <!-- Seção de Contato / Orçamento (Funil de Vendas) -->
-    <section id="contato" class="py-24 bg-[#050505]">
+    <section id="contato" class="py-20 md:py-24 bg-[#050505]">
         <div class="container mx-auto px-4 md:px-6">
             <div class="reveal text-center mb-10">
-                <h3 class="text-4xl md:text-5xl font-serif-display font-bold text-white">Vamos Construir Seu Dia?</h3>
-                <p class="mt-4 text-gray-400 max-w-2xl mx-auto text-lg">Preencha o briefing abaixo para receber uma proposta personalizada.</p>
+                <h3 class="text-3xl md:text-4xl lg:text-5xl font-serif-display font-bold text-white">Vamos Construir Seu Dia?</h3>
+                <p class="mt-3 md:mt-4 text-gray-400 max-w-2xl mx-auto text-sm md:text-lg">Preencha o briefing abaixo para receber uma proposta personalizada.</p>
             </div>
             
-            <div class="max-w-3xl mx-auto bg-[#111] p-6 md:p-12 rounded-3xl border border-white/5 shadow-2xl reveal">
+            <div class="max-w-3xl mx-auto bg-[#111] p-5 sm:p-8 md:p-12 rounded-3xl border border-white/5 shadow-2xl reveal">
                 <!-- Barra de Progresso -->
-                <div class="mb-10">
-                    <div class="flex justify-between text-sm uppercase tracking-widest text-gray-500 mb-3 font-semibold">
+                <div class="mb-8 md:mb-10">
+                    <div class="flex justify-between text-[10px] md:text-sm uppercase tracking-widest text-gray-500 mb-3 font-semibold">
                         <span id="step-label">Briefing Inicial</span>
                         <span id="step-counter">1/5</span>
                     </div>
@@ -390,20 +393,21 @@
                     
                     <!-- PASSO 1: O Grande Dia -->
                     <div id="step-1" class="step-content active">
-                        <h4 class="text-2xl md:text-3xl font-serif-display text-white mb-8">Primeiro, a data e o local</h4>
-                        <div class="space-y-6">
+                        <h4 class="text-xl md:text-3xl font-serif-display text-white mb-6 md:mb-8">Primeiro, a data e o local</h4>
+                        <div class="space-y-4 md:space-y-6">
                             <div>
-                                <label class="block text-sm text-gray-400 uppercase mb-2 font-bold tracking-wide">Data do Evento</label>
-                                <input type="date" name="eventDate" class="w-full bg-[#1a1a1a] border border-gray-700 text-white text-lg rounded-xl p-5 focus:border-gold-400 focus:outline-none transition-colors h-16 appearance-none">
+                                <label class="block text-xs md:text-sm text-gray-400 uppercase mb-2 font-bold tracking-wide">Data do Evento</label>
+                                <input type="date" name="eventDate" class="w-full bg-[#1a1a1a] border border-gray-700 text-white text-base md:text-lg rounded-xl p-4 md:p-5 focus:border-gold-400 focus:outline-none transition-colors h-14 md:h-16 appearance-none">
                             </div>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Otimização Grid Mobile -->
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
                                 <div>
-                                    <label class="block text-sm text-gray-400 uppercase mb-2 font-bold tracking-wide md:hidden">Cidade</label>
-                                    <input type="text" name="eventCity" placeholder="Cidade" class="w-full bg-[#1a1a1a] border border-gray-700 text-white text-lg rounded-xl p-5 focus:border-gold-400 focus:outline-none transition-colors h-16">
+                                    <label class="block text-xs md:text-sm text-gray-400 uppercase mb-2 font-bold tracking-wide md:hidden">Cidade</label>
+                                    <input type="text" name="eventCity" placeholder="Cidade" class="w-full bg-[#1a1a1a] border border-gray-700 text-white text-base md:text-lg rounded-xl p-4 md:p-5 focus:border-gold-400 focus:outline-none transition-colors h-14 md:h-16">
                                 </div>
                                 <div>
-                                    <label class="block text-sm text-gray-400 uppercase mb-2 font-bold tracking-wide md:hidden">Local</label>
-                                    <input type="text" name="eventVenue" placeholder="Local (Igreja/Salão)" class="w-full bg-[#1a1a1a] border border-gray-700 text-white text-lg rounded-xl p-5 focus:border-gold-400 focus:outline-none transition-colors h-16">
+                                    <label class="block text-xs md:text-sm text-gray-400 uppercase mb-2 font-bold tracking-wide md:hidden">Local</label>
+                                    <input type="text" name="eventVenue" placeholder="Local (Igreja/Salão)" class="w-full bg-[#1a1a1a] border border-gray-700 text-white text-base md:text-lg rounded-xl p-4 md:p-5 focus:border-gold-400 focus:outline-none transition-colors h-14 md:h-16">
                                 </div>
                             </div>
                         </div>
@@ -411,29 +415,30 @@
 
                     <!-- PASSO 2: O Escopo (Estratégia do Bundle) -->
                     <div id="step-2" class="step-content">
-                        <h4 class="text-2xl md:text-3xl font-serif-display text-white mb-3">O que você deseja musicalizar?</h4>
-                        <p class="text-base text-gold-400 mb-8 italic">*Recomendamos o pacote completo para harmonia do evento.</p>
+                        <h4 class="text-xl md:text-3xl font-serif-display text-white mb-2 md:mb-3">O que você deseja musicalizar?</h4>
+                        <p class="text-sm md:text-base text-gold-400 mb-6 md:mb-8 italic">*Recomendamos o pacote completo para a harmonia do evento.</p>
                         
-                        <div class="space-y-5">
-                            <label class="flex items-start p-5 bg-[#1a1a1a] border border-gray-700 rounded-xl cursor-pointer hover:border-gold-400 transition-colors group min-h-[100px]">
-                                <input type="radio" name="scope" value="Cerimônia + Recepção (Completo)" class="mt-1 w-6 h-6 text-gold-400 bg-gray-800 border-gray-600 focus:ring-gold-400 flex-shrink-0" checked>
-                                <div class="ml-5">
-                                    <span class="block text-white text-lg font-bold group-hover:text-gold-400 mb-1">Experiência Completa (Cerimônia + Recepção)</span>
-                                    <span class="block text-sm text-gray-400 leading-relaxed">Inclui o Bônus do Receptivo Pré-Cerimônia. A opção mais vantajosa.</span>
+                        <div class="space-y-4 md:space-y-5">
+                            <label class="flex items-start p-4 md:p-5 bg-[#1a1a1a] border border-gray-700 rounded-xl cursor-pointer hover:border-gold-400 transition-colors group min-h-[100px]">
+                                <input type="radio" name="scope" value="Cerimônia Completa até saída" class="mt-1 w-5 h-5 md:w-6 md:h-6 text-gold-400 bg-gray-800 border-gray-600 focus:ring-gold-400 flex-shrink-0" checked>
+                                <div class="ml-4 md:ml-5">
+                                    <span class="block text-white text-base md:text-lg font-bold group-hover:text-gold-400 mb-1">Cerimônia completa até a saída dos noivos</span>
+                                    <span class="block text-xs md:text-sm text-gray-400 leading-relaxed">Inclui o bônus do receptivo de 15 minutos antes da cerimônia.</span>
                                 </div>
                             </label>
 
-                            <label class="flex items-center p-5 bg-[#1a1a1a] border border-gray-700 rounded-xl cursor-pointer hover:border-gold-400 transition-colors min-h-[80px]">
-                                <input type="radio" name="scope" value="Apenas Cerimônia" class="w-6 h-6 text-gold-400 bg-gray-800 border-gray-600 focus:ring-gold-400 flex-shrink-0">
-                                <div class="ml-5">
-                                    <span class="block text-white text-lg">Apenas Cerimônia Religiosa/Amor</span>
+                            <label class="flex items-start p-4 md:p-5 bg-[#1a1a1a] border border-gray-700 rounded-xl cursor-pointer hover:border-gold-400 transition-colors min-h-[80px]">
+                                <input type="radio" name="scope" value="Cerimônia + Receptivo 60min" class="mt-1 w-5 h-5 md:w-6 md:h-6 text-gold-400 bg-gray-800 border-gray-600 focus:ring-gold-400 flex-shrink-0">
+                                <div class="ml-4 md:ml-5">
+                                    <span class="block text-white text-base md:text-lg font-bold group-hover:text-gold-400 mb-1">Cerimônia completa + Receptivo de 60 minutos</span>
+                                    <span class="block text-xs md:text-sm text-gray-400 leading-relaxed">Com a mesma configuração de instrumentos da cerimônia.</span>
                                 </div>
                             </label>
                             
-                            <label class="flex items-center p-5 bg-[#1a1a1a] border border-gray-700 rounded-xl cursor-pointer hover:border-gold-400 transition-colors min-h-[80px]">
-                                <input type="radio" name="scope" value="Corporativo/Outros" class="w-6 h-6 text-gold-400 bg-gray-800 border-gray-600 focus:ring-gold-400 flex-shrink-0">
-                                <div class="ml-5">
-                                    <span class="block text-white text-lg">Corporativo / Outros</span>
+                            <label class="flex items-start p-4 md:p-5 bg-[#1a1a1a] border border-gray-700 rounded-xl cursor-pointer hover:border-gold-400 transition-colors min-h-[80px] items-center">
+                                <input type="radio" name="scope" value="Cerimônia + Banda 2h" class="w-5 h-5 md:w-6 md:h-6 text-gold-400 bg-gray-800 border-gray-600 focus:ring-gold-400 flex-shrink-0">
+                                <div class="ml-4 md:ml-5">
+                                    <span class="block text-white text-base md:text-lg font-bold group-hover:text-gold-400 leading-tight">Cerimônia completa + Receptivo de 2 horas da banda</span>
                                 </div>
                             </label>
                         </div>
@@ -441,116 +446,107 @@
 
                     <!-- PASSO 3: Formação Preferida -->
                     <div id="step-3" class="step-content">
-                        <h4 class="text-2xl md:text-3xl font-serif-display text-white mb-8">Qual formação chamou sua atenção?</h4>
+                        <h4 class="text-xl md:text-3xl font-serif-display text-white mb-6 md:mb-8">Qual formação chamou sua atenção?</h4>
                         
-                        <!-- Grid agora é 1 coluna no mobile para dar espaço -->
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5 mb-8">
                             <label class="cursor-pointer w-full">
-                                <input type="radio" name="formation" value="Singela" class="peer hidden">
-                                <div class="p-6 bg-[#1a1a1a] border border-gray-700 rounded-xl peer-checked:border-gold-400 peer-checked:bg-gold-900/20 hover:bg-gray-800 transition-all flex items-center gap-4 h-full">
-                                    <span class="text-4xl">🎻</span>
+                                <input type="radio" name="formation" value="Formação Inicial" class="peer hidden">
+                                <div class="p-4 md:p-6 bg-[#1a1a1a] border border-gray-700 rounded-xl peer-checked:border-gold-400 peer-checked:bg-gold-900/20 hover:bg-gray-800 transition-all flex items-center gap-3 md:gap-4 h-full">
+                                    <span class="text-3xl md:text-4xl">🎻</span>
                                     <div>
-                                        <span class="text-white font-bold text-lg block">Singela</span>
-                                        <span class="text-sm text-gray-500">Trio (Ideal p/ Mini Wedding)</span>
+                                        <span class="text-white font-bold text-base md:text-lg block leading-tight">Formação Inicial</span>
+                                        <span class="text-xs md:text-sm text-gray-500">2 Vlns, Cello, Piano</span>
                                     </div>
                                 </div>
                             </label>
                             <label class="cursor-pointer w-full">
-                                <input type="radio" name="formation" value="Quarteto de Cordas" class="peer hidden">
-                                <div class="p-6 bg-[#1a1a1a] border border-gray-700 rounded-xl peer-checked:border-gold-400 peer-checked:bg-gold-900/20 hover:bg-gray-800 transition-all flex items-center gap-4 h-full">
-                                    <span class="text-4xl">🎼</span>
+                                <input type="radio" name="formation" value="Quarteto de Cordas + Piano" class="peer hidden">
+                                <div class="p-4 md:p-6 bg-[#1a1a1a] border border-gray-700 rounded-xl peer-checked:border-gold-400 peer-checked:bg-gold-900/20 hover:bg-gray-800 transition-all flex items-center gap-3 md:gap-4 h-full">
+                                    <span class="text-3xl md:text-4xl">🎼</span>
                                     <div>
-                                        <span class="text-white font-bold text-lg block">Quarteto Cordas</span>
-                                        <span class="text-sm text-gray-500">Clássico & Elegante</span>
+                                        <span class="text-white font-bold text-base md:text-lg block leading-tight">Quarteto de Cordas + Piano</span>
+                                        <span class="text-xs md:text-sm text-gray-500">2 Vlns, Viola, Cello, Piano</span>
                                     </div>
                                 </div>
                             </label>
                             <label class="cursor-pointer w-full">
-                                <input type="radio" name="formation" value="Quarteto Versátil" class="peer hidden">
-                                <div class="p-6 bg-[#1a1a1a] border border-gray-700 rounded-xl peer-checked:border-gold-400 peer-checked:bg-gold-900/20 hover:bg-gray-800 transition-all flex items-center gap-4 h-full">
-                                    <span class="text-4xl">🎹</span>
+                                <input type="radio" name="formation" value="Formação Completa" class="peer hidden">
+                                <div class="p-4 md:p-6 bg-[#1a1a1a] border border-gray-700 rounded-xl peer-checked:border-gold-400 peer-checked:bg-gold-900/20 hover:bg-gray-800 transition-all flex items-center gap-3 md:gap-4 h-full">
+                                    <span class="text-3xl md:text-4xl">🎹</span>
                                     <div>
-                                        <span class="text-white font-bold text-lg block">Quarteto Versátil</span>
-                                        <span class="text-sm text-gray-500">Pop, Rock & Moderno</span>
+                                        <span class="text-white font-bold text-base md:text-lg block leading-tight">Formação Completa</span>
+                                        <span class="text-xs md:text-sm text-gray-500 line-clamp-2 md:line-clamp-none">2 Vlns, Cello, Piano, Voz, Cajón</span>
                                     </div>
                                 </div>
                             </label>
                             <label class="cursor-pointer w-full">
-                                <input type="radio" name="formation" value="Orquestral" class="peer hidden">
-                                <div class="p-6 bg-[#1a1a1a] border border-gray-700 rounded-xl peer-checked:border-gold-400 peer-checked:bg-gold-900/20 hover:bg-gray-800 transition-all flex items-center gap-4 h-full">
-                                    <span class="text-4xl">🎺</span>
+                                <input type="radio" name="formation" value="Orquestra Premium" class="peer hidden">
+                                <div class="p-4 md:p-6 bg-[#1a1a1a] border border-gray-700 rounded-xl peer-checked:border-gold-400 peer-checked:bg-gold-900/20 hover:bg-gray-800 transition-all flex items-center gap-3 md:gap-4 h-full">
+                                    <span class="text-3xl md:text-4xl">🎺</span>
                                     <div>
-                                        <span class="text-white font-bold text-lg block">Orquestral</span>
-                                        <span class="text-sm text-gray-500">Impacto Sonoro</span>
+                                        <span class="text-white font-bold text-base md:text-lg block leading-tight">Orquestra Premium</span>
+                                        <span class="text-xs md:text-sm text-gray-500 line-clamp-2 md:line-clamp-none">4 Vlns, Cello, Piano, Trompetes, Voz, Cajón</span>
                                     </div>
                                 </div>
                             </label>
                         </div>
 
-                        <div class="mt-6 p-6 bg-[#161616] rounded-xl border border-gray-700">
-                            <p class="text-sm text-gold-400 mb-4 font-bold uppercase tracking-wider">Adicionar Opcionais?</p>
-                            <!-- Grid Vertical no Mobile para facilitar o toque -->
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                <label class="flex items-center p-4 bg-black/40 rounded-lg border border-white/10 cursor-pointer hover:border-gold-400 transition-colors active:bg-white/5">
-                                    <input type="checkbox" name="extras" value="Clarins" class="mr-4 w-6 h-6 accent-gold-400 rounded">
-                                    <span class="text-base text-white font-medium">Clarins Triunfais</span>
+                        <div class="mt-4 md:mt-6 p-5 md:p-6 bg-[#161616] rounded-xl border border-gray-700">
+                            <p class="text-xs md:text-sm text-gold-400 mb-4 font-bold uppercase tracking-wider text-center md:text-left">Adicionar Opcionais?</p>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
+                                <label class="flex items-center p-3 md:p-4 bg-black/40 rounded-lg border border-white/10 cursor-pointer hover:border-gold-400 transition-colors active:bg-white/5">
+                                    <input type="checkbox" name="extras" value="Clarins" class="mr-3 md:mr-4 w-5 h-5 md:w-6 md:h-6 accent-gold-400 rounded">
+                                    <span class="text-sm md:text-base text-white font-medium">Clarins Triunfais</span>
                                 </label>
-                                <label class="flex items-center p-4 bg-black/40 rounded-lg border border-white/10 cursor-pointer hover:border-gold-400 transition-colors active:bg-white/5">
-                                    <input type="checkbox" name="extras" value="Voz" class="mr-4 w-6 h-6 accent-gold-400 rounded">
-                                    <span class="text-base text-white font-medium">Cantores</span>
+                                <label class="flex items-center p-3 md:p-4 bg-black/40 rounded-lg border border-white/10 cursor-pointer hover:border-gold-400 transition-colors active:bg-white/5">
+                                    <input type="checkbox" name="extras" value="Voz" class="mr-3 md:mr-4 w-5 h-5 md:w-6 md:h-6 accent-gold-400 rounded">
+                                    <span class="text-sm md:text-base text-white font-medium">Cantores</span>
                                 </label>
-                                <label class="flex items-center p-4 bg-black/40 rounded-lg border border-white/10 cursor-pointer hover:border-gold-400 transition-colors active:bg-white/5">
-                                    <input type="checkbox" name="extras" value="Percussão" class="mr-4 w-6 h-6 accent-gold-400 rounded">
-                                    <span class="text-base text-white font-medium">Percussão (Cajón)</span>
+                                <label class="flex items-center p-3 md:p-4 bg-black/40 rounded-lg border border-white/10 cursor-pointer hover:border-gold-400 transition-colors active:bg-white/5">
+                                    <input type="checkbox" name="extras" value="Percussão" class="mr-3 md:mr-4 w-5 h-5 md:w-6 md:h-6 accent-gold-400 rounded">
+                                    <span class="text-sm md:text-base text-white font-medium">Percussão (Cajón)</span>
                                 </label>
                             </div>
                         </div>
                     </div>
 
-                    <!-- PASSO 4: Estilo da Recepção (Venda Cruzada) -->
+                    <!-- PASSO 4: Detalhes Específicos -->
                     <div id="step-4" class="step-content">
-                        <h4 class="text-2xl md:text-3xl font-serif-display text-white mb-3">Para a Festa...</h4>
-                        <p class="text-gray-400 text-base mb-8">Se selecionou "Experiência Completa", qual vibe você imagina?</p>
+                        <h4 class="text-xl md:text-3xl font-serif-display text-white mb-2 md:mb-3">Detalhes Cirúrgicos do Evento</h4>
+                        <p class="text-gray-400 text-sm md:text-base mb-6 md:mb-8">Para um orçamento preciso, precisamos entender a fundo o seu sonho.</p>
                         
-                        <div class="space-y-6">
-                            <div class="relative">
-                                <label class="block text-sm text-gray-400 uppercase mb-2 font-bold tracking-wide">Estilo Musical</label>
-                                <select name="receptionStyle" class="w-full bg-[#1a1a1a] border border-gray-700 text-white text-lg rounded-xl p-5 focus:border-gold-400 focus:outline-none appearance-none h-20">
-                                    <option value="Não selecionei festa">Ainda não decidi / Apenas Cerimônia</option>
-                                    <option value="Mini Banda (Animada)">Mini Banda Acústica (Animada)</option>
-                                    <option value="Violão e Voz (Intimista)">Violão e Voz (Intimista/Jantar)</option>
-                                </select>
-                                <div class="pointer-events-none absolute right-5 bottom-8 text-gold-400">
-                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                                </div>
+                        <div class="space-y-4 md:space-y-6">
+                            <div>
+                                <label class="block text-xs md:text-sm text-gray-400 uppercase mb-2 font-bold tracking-wide">Músicas Essenciais</label>
+                                <textarea name="specialSongs" placeholder="Tem alguma música específica que não pode faltar? (Ex: Música exata para a entrada da noiva, saída...)" rows="3" class="w-full bg-[#1a1a1a] border border-gray-700 text-white text-base md:text-lg rounded-xl p-4 md:p-5 focus:border-gold-400 focus:outline-none leading-relaxed"></textarea>
                             </div>
                             
                             <div>
-                                <label class="block text-sm text-gray-400 uppercase mb-2 font-bold tracking-wide">Detalhes Extras</label>
-                                <textarea name="details" placeholder="Conte mais sobre o sonho... (Ex: Música especial para entrada, nome do cerimonial, etc)" rows="4" class="w-full bg-[#1a1a1a] border border-gray-700 text-white text-lg rounded-xl p-5 focus:border-gold-400 focus:outline-none leading-relaxed"></textarea>
+                                <label class="block text-xs md:text-sm text-gray-400 uppercase mb-2 font-bold tracking-wide">Mais Detalhes</label>
+                                <textarea name="eventSpecifics" placeholder="Número aprox. de convidados? O local possui alguma restrição acústica ou de instrumentos? Qual cerimonial responsável?" rows="4" class="w-full bg-[#1a1a1a] border border-gray-700 text-white text-base md:text-lg rounded-xl p-4 md:p-5 focus:border-gold-400 focus:outline-none leading-relaxed"></textarea>
                             </div>
                         </div>
                     </div>
 
                     <!-- PASSO 5: Contato -->
                     <div id="step-5" class="step-content">
-                        <h4 class="text-2xl md:text-3xl font-serif-display text-white mb-8">Onde enviamos a proposta?</h4>
-                        <div class="space-y-6">
-                            <input type="text" name="clientName" placeholder="Seu Nome Completo" required class="w-full bg-[#1a1a1a] border border-gray-700 text-white text-lg rounded-xl p-5 focus:border-gold-400 h-16">
-                            <input type="email" name="clientEmail" placeholder="Seu Melhor E-mail" required class="w-full bg-[#1a1a1a] border border-gray-700 text-white text-lg rounded-xl p-5 focus:border-gold-400 h-16">
-                            <input type="tel" name="clientPhone" placeholder="WhatsApp (com DDD)" required class="w-full bg-[#1a1a1a] border border-gray-700 text-white text-lg rounded-xl p-5 focus:border-gold-400 h-16">
+                        <h4 class="text-xl md:text-3xl font-serif-display text-white mb-6 md:mb-8">Onde enviamos a proposta?</h4>
+                        <div class="space-y-4 md:space-y-6">
+                            <input type="text" name="clientName" placeholder="Seu Nome Completo" required class="w-full bg-[#1a1a1a] border border-gray-700 text-white text-base md:text-lg rounded-xl p-4 md:p-5 focus:border-gold-400 h-14 md:h-16">
+                            <input type="email" name="clientEmail" placeholder="Seu Melhor E-mail" required class="w-full bg-[#1a1a1a] border border-gray-700 text-white text-base md:text-lg rounded-xl p-4 md:p-5 focus:border-gold-400 h-14 md:h-16">
+                            <input type="tel" name="clientPhone" placeholder="WhatsApp (com DDD)" required class="w-full bg-[#1a1a1a] border border-gray-700 text-white text-base md:text-lg rounded-xl p-4 md:p-5 focus:border-gold-400 h-14 md:h-16">
                         </div>
                     </div>
 
                     <!-- Navegação -->
-                    <div class="flex flex-col md:flex-row justify-between mt-12 pt-8 border-t border-white/10 gap-4">
-                        <button type="button" id="prevBtn" class="text-gray-400 hover:text-white px-6 py-4 rounded-xl hidden w-full md:w-auto border border-transparent hover:border-white/20 transition-all">Voltar</button>
+                    <div class="flex flex-col md:flex-row justify-between mt-8 md:mt-12 pt-6 md:pt-8 border-t border-white/10 gap-3 md:gap-4">
+                        <button type="button" id="prevBtn" class="text-gray-400 hover:text-white px-6 py-3 md:py-4 rounded-xl hidden w-full md:w-auto border border-transparent hover:border-white/20 transition-all text-sm md:text-base">Voltar</button>
                         
-                        <button type="button" id="nextBtn" class="bg-gold-500 hover:bg-gold-400 text-black text-lg font-bold px-10 py-4 rounded-full transition-all shadow-[0_0_20px_rgba(212,175,55,0.3)] w-full md:w-auto md:ml-auto flex justify-center items-center">
+                        <button type="button" id="nextBtn" class="bg-gold-500 hover:bg-gold-400 text-black text-base md:text-lg font-bold px-8 md:px-10 py-4 rounded-full transition-all shadow-[0_0_20px_rgba(212,175,55,0.3)] w-full md:w-auto md:ml-auto flex justify-center items-center">
                             Continuar <span class="ml-2">→</span>
                         </button>
                         
-                        <button type="submit" id="submitBtn" class="hidden bg-gradient-to-r from-gold-500 to-rose-500 text-black text-lg font-bold px-10 py-4 rounded-full transition-all hover:scale-105 w-full md:w-auto md:ml-auto shadow-[0_0_25px_rgba(212,175,55,0.4)] flex justify-center items-center">
+                        <button type="submit" id="submitBtn" class="hidden bg-gradient-to-r from-gold-500 to-rose-500 text-black text-base md:text-lg font-bold px-8 md:px-10 py-4 rounded-full transition-all hover:scale-105 w-full md:w-auto md:ml-auto shadow-[0_0_25px_rgba(212,175,55,0.4)] flex justify-center items-center">
                             Solicitar Orçamento VIP
                         </button>
                     </div>
@@ -627,7 +623,7 @@
             const stepCounter = document.getElementById('step-counter');
             let currentStep = 0;
 
-            const stepLabels = ["Data & Local", "O Escopo", "Formação", "Estilo Festa", "Seus Dados"];
+            const stepLabels = ["Data & Local", "O Escopo", "Formação", "Detalhes Extras", "Seus Dados"];
 
             function updateUI() {
                 steps.forEach((step, index) => {
@@ -692,17 +688,17 @@
                 const extras = [];
                 form.querySelectorAll('input[name="extras"]:checked').forEach(el => extras.push(el.value));
 
-                const msg = `*NOVA SOLICITAÇÃO DE ORÇAMENTO - GUARAOBY*\n\n` +
-                    `*👤 Cliente:* ${formData.get('clientName')}\n` +
-                    `*📅 Data:* ${formData.get('eventDate')}\n` +
-                    `*📍 Local:* ${formData.get('eventCity')} - ${formData.get('eventVenue')}\n\n` +
-                    `*📦 Escopo:* ${formData.get('scope')}\n` +
-                    `*🎻 Formação:* ${formData.get('formation') || 'Não selecionada'}\n` +
-                    `*➕ Extras:* ${extras.join(', ') || 'Nenhum'}\n` +
-                    `*🎉 Estilo Recepção:* ${formData.get('receptionStyle')}\n` +
-                    `*📝 Detalhes:* ${formData.get('details')}\n\n` +
-                    `*📞 Contato:* ${formData.get('clientPhone')}\n` +
-                    `*📧 Email:* ${formData.get('clientEmail')}`;
+                const msg = `*NOVA SOLICITAÇÃO DE ORÇAMENTO - GUARAOBY* 🎻\n\n` +
+                    `👤 *Cliente:* ${formData.get('clientName')}\n` +
+                    `📅 *Data:* ${formData.get('eventDate')}\n` +
+                    `📍 *Local:* ${formData.get('eventCity')} - ${formData.get('eventVenue')}\n\n` +
+                    `📋 *Escopo:* ${formData.get('scope')}\n` +
+                    `🎼 *Formação:* ${formData.get('formation') || 'Não selecionada'}\n` +
+                    `➕ *Extras:* ${extras.join(', ') || 'Nenhum'}\n\n` +
+                    `🎵 *Músicas Essenciais:* ${formData.get('specialSongs') || 'Não informado'}\n` +
+                    `📝 *Detalhes Específicos:* ${formData.get('eventSpecifics') || 'Não informado'}\n\n` +
+                    `📞 *Contato:* ${formData.get('clientPhone')}\n` +
+                    `📧 *Email:* ${formData.get('clientEmail')}`;
 
                 const whatsappNumber = "5567981339514"; 
                 window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(msg)}`, '_blank');
